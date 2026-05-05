@@ -1,0 +1,6 @@
+apache-airflow
+datetime
+duckdb
+matplotlib
+pandas
+requests
