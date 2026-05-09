@@ -8,6 +8,8 @@ from datetime import datetime, timedelta
 from scripts.extract import extract 
 from scripts.transform import transform
 from scripts.load import load
+from scripts.check_data import check_data
+
 
 default_args = {
     "owner": "airflow",
@@ -25,7 +27,8 @@ with DAG(
 
     extract_task = PythonOperator(
         task_id = "extract",
-        python_callable = extract
+        python_callable = extract,
+        provide_context = True
     )
 
     transform_task = PythonOperator(
@@ -38,4 +41,9 @@ with DAG(
         python_callable = load
     )
 
-extract_task >> transform_task >> load_task
+    check_task = PythonOperator(
+    task_id="check_data",
+    python_callable=check_data
+    )
+
+extract_task >> transform_task >> load_task >> check_task

@@ -1,0 +1,56 @@
+[2026-05-09T15:29:05.347+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-05-09T15:29:05.364+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline.load manual__2026-05-09T15:23:56.483974+00:00 [queued]>
+[2026-05-09T15:29:05.371+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline.load manual__2026-05-09T15:23:56.483974+00:00 [queued]>
+[2026-05-09T15:29:05.372+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2026-05-09T15:29:05.384+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load> on 2026-05-09 15:23:56.483974+00:00
+[2026-05-09T15:29:05.389+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=334) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2026-05-09T15:29:05.391+0000] {standard_task_runner.py:63} INFO - Started process 351 to run task
+[2026-05-09T15:29:05.391+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'weather_etl_pipeline', 'load', 'manual__2026-05-09T15:23:56.483974+00:00', '--job-id', '155', '--raw', '--subdir', 'DAGS_FOLDER/etl_dags.py', '--cfg-path', '/tmp/tmpopvdi7a5']
+[2026-05-09T15:29:05.392+0000] {standard_task_runner.py:91} INFO - Job 155: Subtask load
+[2026-05-09T15:29:05.434+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_etl_pipeline.load manual__2026-05-09T15:23:56.483974+00:00 [running]> on host 4863bc3b8f87
+[2026-05-09T15:29:05.512+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline' AIRFLOW_CTX_TASK_ID='load' AIRFLOW_CTX_EXECUTION_DATE='2026-05-09T15:23:56.483974+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-09T15:23:56.483974+00:00'
+[2026-05-09T15:29:05.513+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-05-09T15:29:05.517+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-05-09T15:29:05.517+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/scripts/load.py", line 10, in load
+    df = pd.read_csv("/opt/airflow/data/daily_weather_data.csv")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 948, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 611, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1448, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1705, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/common.py", line 863, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/airflow/data/daily_weather_data.csv'
+[2026-05-09T15:29:05.529+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=weather_etl_pipeline, task_id=load, run_id=manual__2026-05-09T15:23:56.483974+00:00, execution_date=20260509T152356, start_date=20260509T152905, end_date=20260509T152905
+[2026-05-09T15:29:05.538+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 155 for task load ([Errno 2] No such file or directory: '/opt/airflow/data/daily_weather_data.csv'; 351)
+[2026-05-09T15:29:05.570+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-05-09T15:29:05.588+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-05-09T15:29:05.590+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

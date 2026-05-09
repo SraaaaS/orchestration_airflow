@@ -1,0 +1,41 @@
+[2026-05-09T15:24:03.670+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-05-09T15:24:03.689+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline.load manual__2026-05-09T15:23:56.483974+00:00 [queued]>
+[2026-05-09T15:24:03.696+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline.load manual__2026-05-09T15:23:56.483974+00:00 [queued]>
+[2026-05-09T15:24:03.697+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-05-09T15:24:03.709+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load> on 2026-05-09 15:23:56.483974+00:00
+[2026-05-09T15:24:03.717+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=252) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2026-05-09T15:24:03.718+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'weather_etl_pipeline', 'load', 'manual__2026-05-09T15:23:56.483974+00:00', '--job-id', '154', '--raw', '--subdir', 'DAGS_FOLDER/etl_dags.py', '--cfg-path', '/tmp/tmpdanjcdu6']
+[2026-05-09T15:24:03.719+0000] {standard_task_runner.py:63} INFO - Started process 269 to run task
+[2026-05-09T15:24:03.719+0000] {standard_task_runner.py:91} INFO - Job 154: Subtask load
+[2026-05-09T15:24:03.763+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_etl_pipeline.load manual__2026-05-09T15:23:56.483974+00:00 [running]> on host 4863bc3b8f87
+[2026-05-09T15:24:03.845+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline' AIRFLOW_CTX_TASK_ID='load' AIRFLOW_CTX_EXECUTION_DATE='2026-05-09T15:23:56.483974+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-09T15:23:56.483974+00:00'
+[2026-05-09T15:24:03.846+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-05-09T15:24:03.852+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-05-09T15:24:03.853+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/scripts/load.py", line 14, in load
+    con = duckdb.connect(DB_PATH)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.InvalidInputException: Invalid Input Error: Please provide either a str or a pathlib.Path, not <class 'NoneType'>
+[2026-05-09T15:24:03.863+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=weather_etl_pipeline, task_id=load, run_id=manual__2026-05-09T15:23:56.483974+00:00, execution_date=20260509T152356, start_date=20260509T152403, end_date=20260509T152403
+[2026-05-09T15:24:03.874+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 154 for task load (Invalid Input Error: Please provide either a str or a pathlib.Path, not <class 'NoneType'>; 269)
+[2026-05-09T15:24:03.895+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-05-09T15:24:03.915+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-05-09T15:24:03.917+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

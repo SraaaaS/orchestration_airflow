@@ -1,0 +1,40 @@
+[2026-05-06T17:19:32.742+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-05-06T17:19:32.762+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline.load manual__2026-05-06T17:19:26.736053+00:00 [queued]>
+[2026-05-06T17:19:32.769+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline.load manual__2026-05-06T17:19:26.736053+00:00 [queued]>
+[2026-05-06T17:19:32.770+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-05-06T17:19:32.784+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load> on 2026-05-06 17:19:26.736053+00:00
+[2026-05-06T17:19:32.791+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=385) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2026-05-06T17:19:32.793+0000] {standard_task_runner.py:63} INFO - Started process 402 to run task
+[2026-05-06T17:19:32.793+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'weather_etl_pipeline', 'load', 'manual__2026-05-06T17:19:26.736053+00:00', '--job-id', '75', '--raw', '--subdir', 'DAGS_FOLDER/etl_dags.py', '--cfg-path', '/tmp/tmpb4df3_5n']
+[2026-05-06T17:19:32.795+0000] {standard_task_runner.py:91} INFO - Job 75: Subtask load
+[2026-05-06T17:19:32.839+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_etl_pipeline.load manual__2026-05-06T17:19:26.736053+00:00 [running]> on host 0c6f23530f59
+[2026-05-06T17:19:32.922+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline' AIRFLOW_CTX_TASK_ID='load' AIRFLOW_CTX_EXECUTION_DATE='2026-05-06T17:19:26.736053+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-06T17:19:26.736053+00:00'
+[2026-05-06T17:19:32.924+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-05-06T17:19:32.952+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-05-06T17:19:32.952+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/scripts/load.py", line 20, in load
+    con.execute("""INSERT INTO weather
+_duckdb.BinderException: Binder Error: table weather has 2 columns but 3 values were supplied
+[2026-05-06T17:19:32.964+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=weather_etl_pipeline, task_id=load, run_id=manual__2026-05-06T17:19:26.736053+00:00, execution_date=20260506T171926, start_date=20260506T171932, end_date=20260506T171932
+[2026-05-06T17:19:32.976+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 75 for task load (Binder Error: table weather has 2 columns but 3 values were supplied; 402)
+[2026-05-06T17:19:33.010+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-05-06T17:19:33.026+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-05-06T17:19:33.029+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
