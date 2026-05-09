@@ -4,7 +4,6 @@ import duckdb
 def load():
     df = pd.read_csv("data/daily_weather_data.csv") 
     #df["date"] = pd.to_datetime(df["date"]).dt.date    
-    df = df[["time","T_moyenne"]]
 
     con = duckdb.connect("weather.db") #beware
 

@@ -3,6 +3,5 @@ datetime
 dotenv
 duckdb
 matplotlib
-os
 pandas
 requests
