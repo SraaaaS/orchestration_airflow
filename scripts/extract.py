@@ -56,7 +56,12 @@ def extract():
     df = pd.DataFrame({"time" : data["hourly"]["time"], 
                        "temperature_2m" : data["hourly"]["temperature_2m"]
                        })
+    
+    df["time"] = pd.to_datetime(df["time"], utc=True)
 
+    now = pd.Timestamp.now(tz="UTC")
+
+    df = df[df["time"] <= now]
 
     # now = pd.Timestamp.utcnow()
     # df = df[df["time"]<= now]
