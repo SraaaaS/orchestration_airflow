@@ -8,8 +8,10 @@ DB_PATH = os.getenv("WEATHER_DB_PATH")
 CSV_PATH = os.getenv("CSV_PATH")
 
 def check_data():
+    print("Connexion à la base de données")
     con = duckdb.connect(DB_PATH)
 
+    print("Affichage de toute la table en commencant par les nouvelles valeurs")
     result = con.execute("""
         SELECT *
         FROM weather
@@ -17,7 +19,8 @@ def check_data():
     """).fetchall()
     
     print(result)
-
+    
+    print("Nombre total de valeurs presentes dans la table")
     result = con.execute("""
     SELECT COUNT(*)
     FROM weather

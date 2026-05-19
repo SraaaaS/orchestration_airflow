@@ -2,6 +2,7 @@ apache-airflow
 datetime
 dotenv
 duckdb
+loguru
 matplotlib
 pandas
 requests
