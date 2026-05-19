@@ -1,35 +1,35 @@
-import requests
-import pandas as pd
-import os 
-os.makedirs("/opt/airflow/data", exist_ok=True)
+# import requests
+# import pandas as pd
+# import os 
+# os.makedirs("/opt/airflow/data", exist_ok=True)
 
-def extract(**context):
-    start_date = context["prev_ds"]
-    end_date = context["ds"]
+# def extract(**context):
+#     start_date = context["prev_ds"]
+#     end_date = context["ds"]
 
-    base_url = "https://archive-api.open-meteo.com/v1/archive?"
-    params = {"latitude":45.7485,
-              "longitude":4.8467, 
-              "start_date": start_date,
-              "end_date": end_date,
-              "hourly": "temperature_2m"
-              }
-    response = requests.get(base_url, params=params)
+#     base_url = "https://archive-api.open-meteo.com/v1/archive?"
+#     params = {"latitude":45.7485,
+#               "longitude":4.8467, 
+#               "start_date": start_date,
+#               "end_date": end_date,
+#               "hourly": "temperature_2m"
+#               }
+#     response = requests.get(base_url, params=params)
 
-    if response.status_code != 200:
-        raise Exception(f"API  error/ {response.status_code} - {response.text}")
+#     if response.status_code != 200:
+#         raise Exception(f"API  error/ {response.status_code} - {response.text}")
     
-    data = response.json()
+#     data = response.json()
 
-    if "hourly" not in data:
-        raise Exception("Missing 'hourly in API response")
+#     if "hourly" not in data:
+#         raise Exception("Missing 'hourly in API response")
 
-    df = pd.DataFrame({"time" : data["hourly"]["time"], 
-                       "temperature_2m" : data["hourly"]["temperature_2m"]
-                       })
-    df.to_csv("/opt/airflow/data/raw_weather_data.csv", index=False)
-    #df.to_csv("data/raw_weather_data.csv", index=False)
-    return df
+#     df = pd.DataFrame({"time" : data["hourly"]["time"], 
+#                        "temperature_2m" : data["hourly"]["temperature_2m"]
+#                        })
+#     df.to_csv("/opt/airflow/data/raw_weather_data.csv", index=False)
+#     #df.to_csv("data/raw_weather_data.csv", index=False)
+#     return df
 
 
 
@@ -128,3 +128,98 @@ def extract(**context):
 #     )
 
 #     con.close()
+
+#-------------------------------------------------
+from datetime import datetime, timedelta
+import pandas as pd
+import requests
+import duckdb
+import os
+from dotenv import load_dotenv 
+load_dotenv()
+
+DB_PATH = os.getenv("WEATHER_DB_PATH")
+CSV_PATH = os.getenv("CSV_PATH")
+
+
+def extract():
+
+    # -----------------------------
+    # Connexion DB
+    # -----------------------------
+    con = duckdb.connect(DB_PATH)
+
+    # -----------------------------
+    # Vérifie si la table existe
+    # -----------------------------
+    table_exists = con.execute("""
+        SELECT COUNT(*)
+        FROM information_schema.tables
+        WHERE table_name = 'weather'
+    """).fetchone()[0]
+
+    # -----------------------------
+    # Premier lancement
+    # -----------------------------
+    if table_exists == 0:
+
+        start_date = "2024-01-01"
+
+    # -----------------------------
+    # Récupération incrémentale
+    # -----------------------------
+    else:
+
+        last_date = con.execute("""
+            SELECT MAX(date)
+            FROM weather
+        """).fetchone()[0]
+        start_date = last_date
+        # #start_date = (
+        #     last_date + timedelta(days=1)
+        # ).strftime("%Y-%m-%d")
+
+    # -----------------------------
+    # Date actuelle
+    # -----------------------------
+    end_date = datetime.now().strftime("%Y-%m-%d")
+
+    print(f"start_date = {start_date}")
+    print(f"end_date = {end_date}")
+
+    # -----------------------------
+    # API météo
+    # -----------------------------
+
+    
+    base_url = "https://archive-api.open-meteo.com/v1/archive?"
+    params = {"latitude":45.7485,
+              "longitude":4.8467, 
+              "start_date": start_date,
+              "end_date": end_date,
+              "hourly": "temperature_2m"
+              }
+    response = requests.get(base_url, params=params)
+
+    if response.status_code != 200:
+        raise Exception(f"API  error/ {response.status_code} - {response.text}")
+    
+    data = response.json()
+
+    # -----------------------------
+    # DataFrame
+    # -----------------------------
+    df = pd.DataFrame({"time" : data["hourly"]["time"], 
+                       "temperature_2m" : data["hourly"]["temperature_2m"]
+                       })
+
+    print(df.head())
+
+    # -----------------------------
+    # CSV TEMPORAIRE
+    # -----------------------------
+    os.makedirs("/opt/airflow/data", exist_ok=True)
+
+    df.to_csv(CSV_PATH, index=False)
+
+    con.close()

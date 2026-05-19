@@ -28,7 +28,7 @@ with DAG(
     extract_task = PythonOperator(
         task_id = "extract",
         python_callable = extract,
-        provide_context = True
+        #provide_context = True
     )
 
     transform_task = PythonOperator(
@@ -42,8 +42,8 @@ with DAG(
     )
 
     check_task = PythonOperator(
-    task_id="check_data",
-    python_callable=check_data
+        task_id="check_data",
+        python_callable=check_data
     )
 
 extract_task >> transform_task >> load_task >> check_task
