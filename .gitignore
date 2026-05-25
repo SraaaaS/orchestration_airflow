@@ -1,0 +1,21 @@
+.env
+
+#Fichier Python: ignorer le cache Python
+__pycache__/
+*.py[cod]
+
+#logs et outputs
+*.logs
+*.db
+*.bak
+*.tmp
+
+#Parametres specifiques a sa configuration .vscode
+.vscode/
+
+#Fichiers Docker
+**/docker-compose.override.yml
+**/.docker/
+
+#OS specifiques
+Thumbs.db

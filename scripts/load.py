@@ -15,7 +15,7 @@ def load():
     print("creation de la table en cas d'inexistence")
     con.execute("""
         CREATE TABLE IF NOT EXISTS weather (
-            date DATE,
+            date DATE UNIQUE,
             T_journaliere DECIMAL(5,2)
         )
     """)
@@ -27,10 +27,9 @@ def load():
         INSERT INTO weather
         SELECT *
         FROM temp_df
-        WHERE CAST(date AS DATE)
-        NOT IN (
-            SELECT date FROM weather
-        )
+        ON CONFLICT (date)
+        DO UPDATE
+        SET T_journaliere = EXCLUDED.T_journaliere
     """)
 
     con.close()
