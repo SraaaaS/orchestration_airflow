@@ -1,0 +1,16 @@
+version: 2
+
+models:
+
+  - name: daily_temperature
+  
+    columns:
+    
+      - name: date
+          tests:
+            - unique
+            - not_null
+
+      - name : t_journaliere
+          tests:
+            - not_null
