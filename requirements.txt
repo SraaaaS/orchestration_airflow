@@ -6,3 +6,5 @@ loguru
 matplotlib
 pandas
 requests
+dbt-core
+dbt-duckdb
