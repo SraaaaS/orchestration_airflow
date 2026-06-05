@@ -6,7 +6,8 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 
 from scripts.extract import extract 
-from scripts.transform import transform
+from scripts.run_dbt import run_dbt
+from scripts.test_dbt import test_dbt
 from scripts.load import load
 from scripts.check_data import check_data
 
@@ -30,10 +31,14 @@ with DAG(
         python_callable = extract,
         #provide_context = True
     )
+    run_dbt_task = PythonOperator(
+        task_id = "run_dbt",
+        python_callable = run_dbt
+    )
 
-    transform_task = PythonOperator(
-        task_id = "transform",
-        python_callable = transform
+    test_dbt_task = PythonOperator(
+        task_id = "test_dbt",
+        python_callable = test_dbt
     )
 
     load_task = PythonOperator(
@@ -46,4 +51,4 @@ with DAG(
         python_callable=check_data
     )
 
-extract_task >> transform_task >> load_task >> check_task
+extract_task >> run_dbt_task >> test_dbt_task >> load_task >> check_task
