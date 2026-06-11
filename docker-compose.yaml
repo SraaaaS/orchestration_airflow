@@ -26,7 +26,7 @@ x-airflow-common:
     - ./dags:/opt/airflow/dags
     - ./scripts:/opt/airflow/scripts
     - ./data:/opt/airflow/data
-    - ./data:/opt/airflow/dbt_weather
+    - ./dbt_weather:/opt/airflow/dbt_weather
     # - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     # - ${AIRFLOW_PROJ_DIR:-.}/scripts:/opt/airflow/scripts 
     # - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs

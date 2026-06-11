@@ -1,0 +1,361 @@
+[0m11:48:06.198186 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f197074e8a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f1970fba720>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f19707704a0>]}
+
+
+============================== 11:48:06.263083 | 14c33460-7c87-4dee-83e5-ff60813f33b2 ==============================
+[0m11:48:06.263083 [info ] [MainThread]: Running with dbt=1.8.8
+[0m11:48:06.266458 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/opt/airflow/dbt_weather', 'debug': 'False', 'fail_fast': 'False', 'log_path': '/opt/airflow/dbt_weather/logs', 'version_check': 'True', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'False', 'quiet': 'False', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'log_format': 'default', 'static_parser': 'True', 'target_path': 'None', 'invocation_command': 'dbt run --project-dir /opt/airflow/dbt_weather --profiles-dir /opt/airflow/dbt_weather', 'send_anonymous_usage_stats': 'True'}
+[0m11:48:06.815588 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '14c33460-7c87-4dee-83e5-ff60813f33b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f1970019970>]}
+[0m11:48:06.973119 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '14c33460-7c87-4dee-83e5-ff60813f33b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f19714943e0>]}
+[0m11:48:06.979713 [info ] [MainThread]: Registered adapter: duckdb=1.8.3
+[0m11:48:07.018808 [debug] [MainThread]: checksum: ec53e341a936509427e16df1c646386a84befec52c1957e3f4359fbc36fc93f5, vars: {}, profile: , target: , version: 1.8.8
+[0m11:48:07.032760 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m11:48:07.036557 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '14c33460-7c87-4dee-83e5-ff60813f33b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f1970e3ec30>]}
+[0m11:48:07.273705 [error] [MainThread]: Encountered an error:
+Parsing Error
+  Error reading weather_project: schema.yml - Runtime Error
+    Syntax error near line 10
+    ------------------------------
+    7  |     columns:
+    8  |     
+    9  |       - name: date
+    10 |           tests:
+    11 |             - unique
+    12 |             - not_null
+    13 | 
+    
+    Raw Error:
+    ------------------------------
+    mapping values are not allowed in this context
+      in "<unicode string>", line 10, column 16
+[0m11:48:07.279178 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 1.2533766, "process_user_time": 6.335932, "process_kernel_time": 0.556597, "process_mem_max_rss": "210820", "process_in_blocks": "824", "process_out_blocks": "4416", "command_success": false}
+[0m11:48:07.283142 [debug] [MainThread]: Command `dbt run` failed at 11:48:07.282817 after 1.26 seconds
+[0m11:48:07.286344 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f197074f260>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f19702b6870>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f196ffb8290>]}
+[0m11:48:07.289271 [debug] [MainThread]: Flushing usage events
+[0m11:49:28.146091 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7efc95170770>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7efc95738650>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7efc94ad82f0>]}
+
+
+============================== 11:49:28.164230 | 0208db91-0760-4bc3-814e-dce4e19f5fd2 ==============================
+[0m11:49:28.164230 [info ] [MainThread]: Running with dbt=1.8.8
+[0m11:49:28.168314 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/opt/airflow/dbt_weather', 'version_check': 'True', 'warn_error': 'None', 'log_path': '/opt/airflow/dbt_weather/logs', 'debug': 'False', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'log_format': 'default', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'target_path': 'None', 'invocation_command': 'dbt debug --project-dir /opt/airflow/dbt_weather --profiles-dir /opt/airflow/dbt_weather', 'send_anonymous_usage_stats': 'True'}
+[0m11:49:28.266831 [info ] [MainThread]: dbt version: 1.8.8
+[0m11:49:28.270562 [info ] [MainThread]: python version: 3.12.3
+[0m11:49:28.274423 [info ] [MainThread]: python path: /home/airflow/.local/bin/python
+[0m11:49:28.278165 [info ] [MainThread]: os info: Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36
+[0m11:49:28.605099 [info ] [MainThread]: Using profiles dir at /opt/airflow/dbt_weather
+[0m11:49:28.608832 [info ] [MainThread]: Using profiles.yml file at /opt/airflow/dbt_weather/profiles.yml
+[0m11:49:28.612491 [info ] [MainThread]: Using dbt_project.yml file at /opt/airflow/dbt_weather/dbt_project.yml
+[0m11:49:28.620396 [info ] [MainThread]: adapter type: duckdb
+[0m11:49:28.625052 [info ] [MainThread]: adapter version: 1.8.3
+[0m11:49:29.098252 [info ] [MainThread]: Configuration:
+[0m11:49:29.108956 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m11:49:29.116522 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m11:49:29.134570 [info ] [MainThread]: Required dependencies:
+[0m11:49:29.153257 [debug] [MainThread]: Executing "git --help"
+[0m11:49:29.169665 [info ] [MainThread]:  - git [[31mERROR[0m]
+
+[0m11:49:29.179573 [info ] [MainThread]: Connection:
+[0m11:49:29.188958 [info ] [MainThread]:   database: weather
+[0m11:49:29.197824 [info ] [MainThread]:   schema: main
+[0m11:49:29.206108 [info ] [MainThread]:   path: /opt/airflow/data/weather.db
+[0m11:49:29.214980 [info ] [MainThread]:   config_options: None
+[0m11:49:29.224493 [info ] [MainThread]:   extensions: None
+[0m11:49:29.233527 [info ] [MainThread]:   settings: {}
+[0m11:49:29.241023 [info ] [MainThread]:   external_root: .
+[0m11:49:29.247884 [info ] [MainThread]:   use_credential_provider: None
+[0m11:49:29.257119 [info ] [MainThread]:   attach: None
+[0m11:49:29.265851 [info ] [MainThread]:   filesystems: None
+[0m11:49:29.274340 [info ] [MainThread]:   remote: None
+[0m11:49:29.283499 [info ] [MainThread]:   plugins: None
+[0m11:49:29.294163 [info ] [MainThread]:   disable_transactions: False
+[0m11:49:29.302143 [info ] [MainThread]: Registered adapter: duckdb=1.8.3
+[0m11:49:29.332005 [debug] [MainThread]: Acquiring new duckdb connection 'debug'
+[0m11:49:29.552276 [debug] [MainThread]: Using duckdb connection "debug"
+[0m11:49:29.558308 [debug] [MainThread]: On debug: select 1 as id
+[0m11:49:29.564280 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m11:49:29.698570 [debug] [MainThread]: SQL status: OK in 0.134 seconds
+[0m11:49:29.707249 [debug] [MainThread]: On debug: Close
+[0m11:49:29.727507 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m11:49:29.732709 [info ] [MainThread]: [31m1 check failed:[0m
+[0m11:49:29.738016 [info ] [MainThread]: Error from git --help: User does not have permissions for this command: "git"
+
+[0m11:49:29.745479 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_wall_clock_time": 1.7814465, "process_user_time": 4.405512, "process_kernel_time": 0.224009, "process_mem_max_rss": "151008", "process_in_blocks": "1784", "process_out_blocks": "448", "command_success": false}
+[0m11:49:29.752395 [debug] [MainThread]: Command `dbt debug` failed at 11:49:29.751612 after 1.79 seconds
+[0m11:49:29.757418 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m11:49:29.764802 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7efc946b8b60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7efc959a8440>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7efc94442630>]}
+[0m11:49:29.772248 [debug] [MainThread]: Flushing usage events
+[0m11:53:16.039734 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fd92533d400>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fd92622d0d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fd924d25610>]}
+
+
+============================== 11:53:16.062673 | 841ed25f-3f65-496b-909f-ac7dd7540b2e ==============================
+[0m11:53:16.062673 [info ] [MainThread]: Running with dbt=1.8.8
+[0m11:53:16.067416 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/opt/airflow/dbt_weather', 'fail_fast': 'False', 'debug': 'False', 'log_path': '/opt/airflow/dbt_weather/logs', 'version_check': 'True', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'log_format': 'default', 'invocation_command': 'dbt run --project-dir /opt/airflow/dbt_weather --profiles-dir /opt/airflow/dbt_weather', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m11:53:16.603701 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '841ed25f-3f65-496b-909f-ac7dd7540b2e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fd92486cfe0>]}
+[0m11:53:16.717337 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '841ed25f-3f65-496b-909f-ac7dd7540b2e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fd924126e70>]}
+[0m11:53:16.722363 [info ] [MainThread]: Registered adapter: duckdb=1.8.3
+[0m11:53:16.749186 [debug] [MainThread]: checksum: ec53e341a936509427e16df1c646386a84befec52c1957e3f4359fbc36fc93f5, vars: {}, profile: , target: , version: 1.8.8
+[0m11:53:16.761529 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m11:53:16.765314 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '841ed25f-3f65-496b-909f-ac7dd7540b2e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fd91833e030>]}
+[0m11:53:16.946218 [error] [MainThread]: Encountered an error:
+Parsing Error
+  Error reading weather_project: schema.yml - Runtime Error
+    Syntax error near line 10
+    ------------------------------
+    7  |     columns:
+    8  |     
+    9  |       - name: date
+    10 |           tests:
+    11 |             - unique
+    12 |             - not_null
+    13 | 
+    
+    Raw Error:
+    ------------------------------
+    mapping values are not allowed in this context
+      in "<unicode string>", line 10, column 16
+[0m11:53:16.950126 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 1.0520065, "process_user_time": 3.973487, "process_kernel_time": 0.175572, "process_mem_max_rss": "210820", "command_success": false, "process_in_blocks": "0", "process_out_blocks": "0"}
+[0m11:53:16.953863 [debug] [MainThread]: Command `dbt run` failed at 11:53:16.953503 after 1.06 seconds
+[0m11:53:16.956356 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fd9282af020>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fd924100e30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fd92409e2d0>]}
+[0m11:53:16.958750 [debug] [MainThread]: Flushing usage events
+[0m11:58:29.292140 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fdfb59de5d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fdfb547cc50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fdfb5d76690>]}
+
+
+============================== 11:58:29.304906 | d753c378-06e6-4e1d-9b53-299d4ed275b0 ==============================
+[0m11:58:29.304906 [info ] [MainThread]: Running with dbt=1.8.8
+[0m11:58:29.307419 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/opt/airflow/dbt_weather', 'version_check': 'True', 'warn_error': 'None', 'log_path': '/opt/airflow/dbt_weather/logs', 'fail_fast': 'False', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'False', 'log_format': 'default', 'invocation_command': 'dbt run --project-dir /opt/airflow/dbt_weather --profiles-dir /opt/airflow/dbt_weather', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m11:58:29.741422 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'd753c378-06e6-4e1d-9b53-299d4ed275b0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fdfb65055e0>]}
+[0m11:58:29.882913 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'd753c378-06e6-4e1d-9b53-299d4ed275b0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fdfb59a16d0>]}
+[0m11:58:29.888276 [info ] [MainThread]: Registered adapter: duckdb=1.8.3
+[0m11:58:29.919813 [debug] [MainThread]: checksum: ec53e341a936509427e16df1c646386a84befec52c1957e3f4359fbc36fc93f5, vars: {}, profile: , target: , version: 1.8.8
+[0m11:58:29.931303 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m11:58:29.934175 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'd753c378-06e6-4e1d-9b53-299d4ed275b0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fdfb50d91c0>]}
+[0m11:58:30.101088 [error] [MainThread]: Encountered an error:
+Parsing Error
+  Error reading weather_project: schema.yml - Runtime Error
+    Syntax error near line 10
+    ------------------------------
+    7  |     columns:
+    8  |     
+    9  |       - name: date
+    10 |           tests:
+    11 |             - unique
+    12 |             - not_null
+    13 | 
+    
+    Raw Error:
+    ------------------------------
+    mapping values are not allowed in this context
+      in "<unicode string>", line 10, column 16
+[0m11:58:30.104803 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 0.9392109, "process_user_time": 4.905928, "process_kernel_time": 0.304888, "process_mem_max_rss": "210824", "command_success": false, "process_in_blocks": "0", "process_out_blocks": "0"}
+[0m11:58:30.108544 [debug] [MainThread]: Command `dbt run` failed at 11:58:30.108164 after 0.94 seconds
+[0m11:58:30.111502 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fdfb5750fb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fdfb5076120>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fdfa9339910>]}
+[0m11:58:30.114328 [debug] [MainThread]: Flushing usage events
+[0m12:00:13.978552 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fde58456120>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fde55169a00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fde553c4b30>]}
+
+
+============================== 12:00:14.000036 | 44ac9f27-6e86-4bd2-9d16-adb778581ff4 ==============================
+[0m12:00:14.000036 [info ] [MainThread]: Running with dbt=1.8.8
+[0m12:00:14.004331 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'fail_fast': 'False', 'log_path': '/opt/airflow/dbt_weather/logs', 'debug': 'False', 'profiles_dir': '/opt/airflow/dbt_weather', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'log_format': 'default', 'invocation_command': 'dbt run --project-dir /opt/airflow/dbt_weather --profiles-dir /opt/airflow/dbt_weather', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m12:00:14.664120 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '44ac9f27-6e86-4bd2-9d16-adb778581ff4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fde48f16fc0>]}
+[0m12:00:14.838727 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '44ac9f27-6e86-4bd2-9d16-adb778581ff4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fde54c7e990>]}
+[0m12:00:14.844577 [info ] [MainThread]: Registered adapter: duckdb=1.8.3
+[0m12:00:14.873887 [debug] [MainThread]: checksum: ec53e341a936509427e16df1c646386a84befec52c1957e3f4359fbc36fc93f5, vars: {}, profile: , target: , version: 1.8.8
+[0m12:00:14.883908 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m12:00:14.886606 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '44ac9f27-6e86-4bd2-9d16-adb778581ff4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fde54cd78c0>]}
+[0m12:00:15.075331 [error] [MainThread]: Encountered an error:
+Parsing Error
+  Error reading weather_project: schema.yml - Runtime Error
+    Syntax error near line 10
+    ------------------------------
+    7  |     columns:
+    8  |     
+    9  |       - name: date
+    10 |           tests:
+    11 |             - unique
+    12 |             - not_null
+    13 | 
+    
+    Raw Error:
+    ------------------------------
+    mapping values are not allowed in this context
+      in "<unicode string>", line 10, column 16
+[0m12:00:15.081116 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 1.3501045, "process_user_time": 5.631004, "process_kernel_time": 0.332321, "process_mem_max_rss": "210808", "command_success": false, "process_in_blocks": "0", "process_out_blocks": "0"}
+[0m12:00:15.086281 [debug] [MainThread]: Command `dbt run` failed at 12:00:15.085745 after 1.36 seconds
+[0m12:00:15.090718 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fde560325d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fde54e2d7f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fde54e2f7a0>]}
+[0m12:00:15.095253 [debug] [MainThread]: Flushing usage events
+[0m12:03:16.135106 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35ab22c8f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35ab205a00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35ad865280>]}
+
+
+============================== 12:03:16.146135 | d3e1fad0-e282-4064-be6c-c48df7040cc3 ==============================
+[0m12:03:16.146135 [info ] [MainThread]: Running with dbt=1.8.8
+[0m12:03:16.148656 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/opt/airflow/dbt_weather', 'fail_fast': 'False', 'version_check': 'True', 'log_path': '/opt/airflow/dbt_weather/logs', 'debug': 'False', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'False', 'quiet': 'False', 'no_print': 'None', 'log_format': 'default', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'invocation_command': 'dbt run --project-dir /opt/airflow/dbt_weather --profiles-dir /opt/airflow/dbt_weather', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m12:03:16.517523 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'd3e1fad0-e282-4064-be6c-c48df7040cc3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35abf8e540>]}
+[0m12:03:16.639422 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'd3e1fad0-e282-4064-be6c-c48df7040cc3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35aabccef0>]}
+[0m12:03:16.645635 [info ] [MainThread]: Registered adapter: duckdb=1.8.3
+[0m12:03:16.685382 [debug] [MainThread]: checksum: ec53e341a936509427e16df1c646386a84befec52c1957e3f4359fbc36fc93f5, vars: {}, profile: , target: , version: 1.8.8
+[0m12:03:16.700236 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m12:03:16.703761 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'd3e1fad0-e282-4064-be6c-c48df7040cc3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35aab01520>]}
+[0m12:03:21.249704 [warn ] [MainThread]: [[33mWARNING[0m]: Deprecated functionality
+The `tests` config has been renamed to `data_tests`. Please see
+https://docs.getdbt.com/docs/build/data-tests#new-data_tests-syntax for more
+information.
+[0m12:03:21.252074 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': 'd3e1fad0-e282-4064-be6c-c48df7040cc3', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f359eb1f4a0>]}
+[0m12:03:21.272192 [warn ] [MainThread]: [[33mWARNING[0m]: Did not find matching node for patch with name 'daily_temperatures' in the 'models' section of file 'models/schema.yml'
+[0m12:03:21.453089 [warn ] [MainThread]: [[33mWARNING[0m]: Test 'test.weather_project.unique_daily_temperatures_date.d0d8dc9459' (models/schema.yml) depends on a node named 'daily_temperatures' in package '' which was not found
+[0m12:03:21.455214 [warn ] [MainThread]: [[33mWARNING[0m]: Test 'test.weather_project.not_null_daily_temperatures_date.0942ed580c' (models/schema.yml) depends on a node named 'daily_temperatures' in package '' which was not found
+[0m12:03:21.721656 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'd3e1fad0-e282-4064-be6c-c48df7040cc3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f359ec65f10>]}
+[0m12:03:21.907601 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'd3e1fad0-e282-4064-be6c-c48df7040cc3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f359ebe0140>]}
+[0m12:03:21.911166 [info ] [MainThread]: Found 2 models, 416 macros
+[0m12:03:21.914571 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'd3e1fad0-e282-4064-be6c-c48df7040cc3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f359c7ee900>]}
+[0m12:03:21.921737 [info ] [MainThread]: 
+[0m12:03:21.925343 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m12:03:21.942132 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_weather'
+[0m12:03:22.109305 [debug] [ThreadPool]: Using duckdb connection "list_weather"
+[0m12:03:22.114749 [debug] [ThreadPool]: On list_weather: /* {"app": "dbt", "dbt_version": "1.8.8", "profile_name": "weather_project", "target_name": "dev", "connection_name": "list_weather"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where catalog_name = '"weather"'
+    
+  
+  
+[0m12:03:22.118579 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m12:03:22.170978 [debug] [ThreadPool]: SQL status: OK in 0.052 seconds
+[0m12:03:22.175664 [debug] [ThreadPool]: On list_weather: Close
+[0m12:03:22.190061 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_weather, now create_weather_main)
+[0m12:03:22.194788 [debug] [ThreadPool]: Creating schema "database: "weather"
+schema: "main"
+"
+[0m12:03:22.220181 [debug] [ThreadPool]: Using duckdb connection "create_weather_main"
+[0m12:03:22.223079 [debug] [ThreadPool]: On create_weather_main: /* {"app": "dbt", "dbt_version": "1.8.8", "profile_name": "weather_project", "target_name": "dev", "connection_name": "create_weather_main"} */
+
+    
+        select type from duckdb_databases()
+        where database_name='weather'
+        and type='sqlite'
+    
+  
+[0m12:03:22.225195 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m12:03:22.268974 [debug] [ThreadPool]: SQL status: OK in 0.044 seconds
+[0m12:03:22.273977 [debug] [ThreadPool]: Using duckdb connection "create_weather_main"
+[0m12:03:22.275999 [debug] [ThreadPool]: On create_weather_main: BEGIN
+[0m12:03:22.278624 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m12:03:22.280858 [debug] [ThreadPool]: Using duckdb connection "create_weather_main"
+[0m12:03:22.282699 [debug] [ThreadPool]: On create_weather_main: /* {"app": "dbt", "dbt_version": "1.8.8", "profile_name": "weather_project", "target_name": "dev", "connection_name": "create_weather_main"} */
+
+    
+    
+        create schema if not exists "weather"."main"
+    
+[0m12:03:22.286015 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m12:03:22.289265 [debug] [ThreadPool]: On create_weather_main: COMMIT
+[0m12:03:22.291664 [debug] [ThreadPool]: Using duckdb connection "create_weather_main"
+[0m12:03:22.293690 [debug] [ThreadPool]: On create_weather_main: COMMIT
+[0m12:03:22.296465 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m12:03:22.298379 [debug] [ThreadPool]: On create_weather_main: Close
+[0m12:03:22.308607 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_weather_main, now list_weather_main)
+[0m12:03:22.323815 [debug] [ThreadPool]: Using duckdb connection "list_weather_main"
+[0m12:03:22.326499 [debug] [ThreadPool]: On list_weather_main: BEGIN
+[0m12:03:22.329315 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m12:03:22.389240 [debug] [ThreadPool]: SQL status: OK in 0.060 seconds
+[0m12:03:22.392609 [debug] [ThreadPool]: Using duckdb connection "list_weather_main"
+[0m12:03:22.395792 [debug] [ThreadPool]: On list_weather_main: /* {"app": "dbt", "dbt_version": "1.8.8", "profile_name": "weather_project", "target_name": "dev", "connection_name": "list_weather_main"} */
+select
+      'weather' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where table_schema = 'main'
+    and table_catalog = 'weather'
+  
+[0m12:03:22.404878 [debug] [ThreadPool]: SQL status: OK in 0.006 seconds
+[0m12:03:22.409808 [debug] [ThreadPool]: On list_weather_main: ROLLBACK
+[0m12:03:22.415708 [debug] [ThreadPool]: Failed to rollback 'list_weather_main'
+[0m12:03:22.419049 [debug] [ThreadPool]: On list_weather_main: Close
+[0m12:03:22.431034 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'd3e1fad0-e282-4064-be6c-c48df7040cc3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f359c6479b0>]}
+[0m12:03:22.435338 [debug] [MainThread]: Using duckdb connection "master"
+[0m12:03:22.440048 [debug] [MainThread]: On master: BEGIN
+[0m12:03:22.444831 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m12:03:22.493142 [debug] [MainThread]: SQL status: OK in 0.048 seconds
+[0m12:03:22.495693 [debug] [MainThread]: On master: COMMIT
+[0m12:03:22.498103 [debug] [MainThread]: Using duckdb connection "master"
+[0m12:03:22.500386 [debug] [MainThread]: On master: COMMIT
+[0m12:03:22.503015 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m12:03:22.504871 [debug] [MainThread]: On master: Close
+[0m12:03:22.511261 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m12:03:22.513994 [info ] [MainThread]: 
+[0m12:03:22.568873 [debug] [Thread-1 (]: Began running node model.weather_project.stg_weather
+[0m12:03:22.574542 [info ] [Thread-1 (]: 1 of 2 START sql view model main.stg_weather ................................... [RUN]
+[0m12:03:22.581144 [debug] [Thread-1 (]: Acquiring new duckdb connection 'model.weather_project.stg_weather'
+[0m12:03:22.586592 [debug] [Thread-1 (]: Began compiling node model.weather_project.stg_weather
+[0m12:03:22.617908 [debug] [Thread-1 (]: Writing injected SQL for node "model.weather_project.stg_weather"
+[0m12:03:22.681705 [debug] [Thread-1 (]: Began executing node model.weather_project.stg_weather
+[0m12:03:22.805650 [debug] [Thread-1 (]: Writing runtime sql for node "model.weather_project.stg_weather"
+[0m12:03:22.863810 [debug] [Thread-1 (]: Using duckdb connection "model.weather_project.stg_weather"
+[0m12:03:22.867192 [debug] [Thread-1 (]: On model.weather_project.stg_weather: BEGIN
+[0m12:03:22.871433 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m12:03:22.955901 [debug] [Thread-1 (]: SQL status: OK in 0.084 seconds
+[0m12:03:22.960409 [debug] [Thread-1 (]: Using duckdb connection "model.weather_project.stg_weather"
+[0m12:03:22.964828 [debug] [Thread-1 (]: On model.weather_project.stg_weather: /* {"app": "dbt", "dbt_version": "1.8.8", "profile_name": "weather_project", "target_name": "dev", "node_id": "model.weather_project.stg_weather"} */
+
+  
+  create view "weather"."main"."stg_weather__dbt_tmp" as (
+    SELECT 
+  CAST(time AS TIMESTAMP) AS time, temperature_2m
+FROM weather
+  );
+
+[0m12:03:22.988788 [debug] [Thread-1 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.8.8", "profile_name": "weather_project", "target_name": "dev", "node_id": "model.weather_project.stg_weather"} */
+
+  
+  create view "weather"."main"."stg_weather__dbt_tmp" as (
+    SELECT 
+  CAST(time AS TIMESTAMP) AS time, temperature_2m
+FROM weather
+  );
+
+[0m12:03:22.992360 [debug] [Thread-1 (]: DuckDB adapter: Rolling back transaction.
+[0m12:03:22.997113 [debug] [Thread-1 (]: On model.weather_project.stg_weather: ROLLBACK
+[0m12:03:23.020119 [debug] [Thread-1 (]: Failed to rollback 'model.weather_project.stg_weather'
+[0m12:03:23.023395 [debug] [Thread-1 (]: On model.weather_project.stg_weather: Close
+[0m12:03:23.038521 [debug] [Thread-1 (]: Runtime Error in model stg_weather (models/staging/stg_weather.sql)
+  Binder Error: Column "time" referenced that exists in the SELECT clause - but this column cannot be referenced before it is defined
+[0m12:03:23.045439 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'd3e1fad0-e282-4064-be6c-c48df7040cc3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f359ecefec0>]}
+[0m12:03:23.052121 [error] [Thread-1 (]: 1 of 2 ERROR creating sql view model main.stg_weather .......................... [[31mERROR[0m in 0.46s]
+[0m12:03:23.056317 [debug] [Thread-1 (]: Finished running node model.weather_project.stg_weather
+[0m12:03:23.069215 [debug] [Thread-1 (]: Began running node model.weather_project.daily_temperature
+[0m12:03:23.073347 [info ] [Thread-1 (]: 2 of 2 SKIP relation main.daily_temperature .................................... [[33mSKIP[0m]
+[0m12:03:23.076708 [debug] [Thread-1 (]: Finished running node model.weather_project.daily_temperature
+[0m12:03:23.084704 [debug] [MainThread]: Using duckdb connection "master"
+[0m12:03:23.088520 [debug] [MainThread]: On master: BEGIN
+[0m12:03:23.091896 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m12:03:23.149575 [debug] [MainThread]: SQL status: OK in 0.058 seconds
+[0m12:03:23.152445 [debug] [MainThread]: On master: COMMIT
+[0m12:03:23.155810 [debug] [MainThread]: Using duckdb connection "master"
+[0m12:03:23.158812 [debug] [MainThread]: On master: COMMIT
+[0m12:03:23.163581 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m12:03:23.168225 [debug] [MainThread]: On master: Close
+[0m12:03:23.179303 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m12:03:23.182745 [debug] [MainThread]: Connection 'list_weather_main' was properly closed.
+[0m12:03:23.185540 [debug] [MainThread]: Connection 'model.weather_project.stg_weather' was properly closed.
+[0m12:03:23.188387 [info ] [MainThread]: 
+[0m12:03:23.192227 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 1.26 seconds (1.26s).
+[0m12:03:23.196692 [debug] [MainThread]: Command end result
+[0m12:03:23.375383 [info ] [MainThread]: 
+[0m12:03:23.379216 [info ] [MainThread]: [31mCompleted with 1 error and 0 warnings:[0m
+[0m12:03:23.382759 [info ] [MainThread]: 
+[0m12:03:23.386182 [error] [MainThread]:   Runtime Error in model stg_weather (models/staging/stg_weather.sql)
+  Binder Error: Column "time" referenced that exists in the SELECT clause - but this column cannot be referenced before it is defined
+[0m12:03:23.390444 [info ] [MainThread]: 
+[0m12:03:23.395079 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=1 TOTAL=2
+[0m12:03:23.400675 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 7.3779883, "process_user_time": 9.707466, "process_kernel_time": 0.348661, "process_mem_max_rss": "210820", "process_in_blocks": "7224", "command_success": false, "process_out_blocks": "0"}
+[0m12:03:23.404823 [debug] [MainThread]: Command `dbt run` failed at 12:03:23.404430 after 7.38 seconds
+[0m12:03:23.409504 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35ab205a00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f35ab1d3920>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f359ec6e480>]}
+[0m12:03:23.413538 [debug] [MainThread]: Flushing usage events
