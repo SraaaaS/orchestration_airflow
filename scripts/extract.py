@@ -30,7 +30,7 @@ def extract():
             SELECT MAX(time)
             FROM weather
         """).fetchone()[0]        
-        start_date = last_date
+        start_date = str(last_date)[:10]
         
     end_date = datetime.now().strftime("%Y-%m-%d")
 

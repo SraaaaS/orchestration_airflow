@@ -9,7 +9,7 @@ def run_dbt():
     env = os.environ.copy()
 
     result = subprocess.run(
-        [dbt_path, "run", "--project-dir", "/opt/airflow/dbt_weather", "--profiles-dir", "/opt/airflow/dbt_weather"],
+        [dbt_path, "run", "--project-dir", "/opt/airflow/dbt_weather", "--profiles-dir", "/opt/airflow/dbt_weather", "--full-refresh"],
         capture_output=True,
         text=True,
         env=env
