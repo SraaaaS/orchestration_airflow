@@ -1,8 +1,15 @@
 import subprocess
 
 def run_dbt():
-    subprocess.run(
-        ["dbt", "run"],
-        cwd="opt/airflow/dbt_weather",
-        check=True
+    
+    result = subprocess.run(
+    ["dbt", "run", "--project-dir", "/opt/airflow/dbt_weather", "--profiles-dir", "/opt/airflow/dbt_weather"],
+    capture_output=True,
+    text=True
     )
+
+    print(result.stdout)
+    print(result.stderr)
+
+    if result.returncode != 0:
+        raise Exception("dbt failed")

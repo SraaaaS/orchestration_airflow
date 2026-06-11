@@ -1,10 +1,7 @@
 weather_project:
   target: dev
-
   outputs:
     dev:
       type: duckdb
       path: /opt/airflow/data/weather.db
       threads: 1
-
-    
