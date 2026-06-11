@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 import pandas as pd
 import requests
 import duckdb
@@ -27,16 +27,14 @@ def extract():
 
     else:
         last_date = con.execute("""
-            SELECT MAX(date)
+            SELECT MAX(time)
             FROM weather
         """).fetchone()[0]        
         start_date = last_date
         
     end_date = datetime.now().strftime("%Y-%m-%d")
 
-    print(f"start_date = {start_date}")
-    print(f"end_date = {end_date}")
-
+    print(f"Extraction du {start_date} au {end_date}")
 
     print("Récuperation des données via l'API météo")
     base_url = "https://archive-api.open-meteo.com/v1/archive?"
@@ -63,23 +61,13 @@ def extract():
 
     df = df[df["time"] <= now]
 
-    # now = pd.Timestamp.utcnow()
-    # df = df[df["time"]<= now]
-
-    # if os.path.exists(CSV_PATH):
-    #     old_df = pd.read_csv(CSV_PATH)
-    #     old_df["time"] = pd.to_datetime(old_df["time"])
-
-    #     df = pd.concat([old_df, df])
-    #     df = df.drop_duplicates(subset=["time"])
-    
 
     print(df)
     
-    print("Sauvegarde sous le format .csv")
+    print(f"Sauvegarde de {len(df)} lignes sous le format .csv")
     os.makedirs("/opt/airflow/data", exist_ok=True)
 
     df.to_csv(CSV_PATH, index=False)
 
-    print("Fichier sauvegardé sous /opt/airflow/data/raw_weather_data.csv")
+    print(f"Fichier sauvegardé sous {CSV_PATH}")
     con.close()

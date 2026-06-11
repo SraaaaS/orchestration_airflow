@@ -15,21 +15,22 @@ def load():
     print("creation de la table en cas d'inexistence")
     con.execute("""
         CREATE TABLE IF NOT EXISTS weather (
-            date DATE UNIQUE,
-            T_journaliere DECIMAL(5,2)
+            time VARCHAR UNIQUE,
+            temperature_2m DECIMAL(5,2)
         )
     """)
 
     con.register("temp_df", df)
 
-    print("Ajout des nouvelles valeurs dans la table")
+    print("Insertion des données horaires brutes dans la table weather")
     con.execute("""
         INSERT INTO weather
-        SELECT *
+        SELECT time, temperature_2m
         FROM temp_df
-        ON CONFLICT (date)
+        ON CONFLICT (time)
         DO UPDATE
-        SET T_journaliere = EXCLUDED.T_journaliere
+        SET temperature_2m = EXCLUDED.temperature_2m
     """)
 
     con.close()
+    print("Chargement terminé avec succès")

@@ -51,4 +51,4 @@ with DAG(
         python_callable=check_data
     )
 
-extract_task >> run_dbt_task >> test_dbt_task >> load_task >> check_task
+extract_task >> load_task >> run_dbt_task >> test_dbt_task >> check_task
