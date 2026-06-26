@@ -19,3 +19,8 @@ __pycache__/
 
 #OS specifiques
 Thumbs.db
+
+
+dbt_weather/target/
+dbt_weather/logs/
+dbt_weather/dbt_packages/
