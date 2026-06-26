@@ -7,7 +7,7 @@ weather_project:
       user : airflow
       password : airflow
       port : 5432
-      dbname : airflow
+      dbname : weather_db
       schema : public
       threads : 1
       

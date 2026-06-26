@@ -41,7 +41,6 @@ def extract():
         last_date = cursor.fetchone()[0]
         start_date = last_date.strftime("%Y-%m-%d")
     
-
 #     try:
     #     cursor.execute("""
     #         SELECT MAX(time)
