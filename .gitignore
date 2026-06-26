@@ -24,3 +24,7 @@ Thumbs.db
 dbt_weather/target/
 dbt_weather/logs/
 dbt_weather/dbt_packages/
+
+dbt_weather/target/
+dbt_weather/logs/
+data/*.csv

@@ -1,43 +1,62 @@
-import duckdb
+import psycopg2
 import os
 from dotenv import load_dotenv 
 load_dotenv()
 
-DB_PATH = os.getenv("WEATHER_DB_PATH")
+
 def check_data():
     print("Connexion à la base de données")
-    con = duckdb.connect(DB_PATH)
+    con = psycopg2.connect(
+        host="postgres",
+        database="weather_db",
+        user="airflow",
+        password="airflow"
+    )
 
-    # -------------------------------------------------------------
-    # 1. VÉRIFICATION DE LA TABLE BRUTE (INGESTION OUK)
-    # -------------------------------------------------------------
+    cursor = con.cursor()
+    
     print("--- [1/2] DERNIÈRES DONNÉES HORAIRES BRUTES (WEATHER) ---")
-    raw_data = con.execute("""
+    cursor.execute("""
         SELECT *
         FROM weather
         ORDER BY time DESC
         LIMIT 5
-    """).fetchall()
-    print(raw_data)
-    
-    raw_count = con.execute("SELECT COUNT(*) FROM weather").fetchone()[0]
-    print(f"Nombre total de lignes brutes : {raw_count}\n")
+    """)
 
-    # -------------------------------------------------------------
-    # 2. VÉRIFICATION DE LA TABLE FINALE dbt (TRANSFORMATION OK)
-    # -------------------------------------------------------------
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
+    
+    con.commit()
+    
+
+    cursor.execute("""SELECT COUNT(*) FROM weather
+                   """)
+    result = cursor.fetchone()
+    print(f"Nombre de lignes : {result[0]}")
+
     print("--- [2/2] DERNIÈRES MOYENNES JOURNALIÈRES (DBT MART) ---")
-    # Note : remplace 'daily_temperature' par 'daily_temperatures' (avec un s) 
-    # si c'est le nom exact de ton fichier SQL dbt.
-    dbt_data = con.execute("""
+    cursor.execute("""
         SELECT *
         FROM daily_temperature
         ORDER BY date DESC
         LIMIT 5
-    """).fetchall()
-    print(dbt_data)
-    
-    dbt_count = con.execute("SELECT COUNT(*) FROM daily_temperature").fetchone()[0]
-    print(f"Nombre total de jours calculés : {dbt_count}")
+    """)
 
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
+    
+    con.commit()
+
+
+    cursor.execute("""SELECT COUNT(*) FROM daily_temperature
+                   """)
+    result = cursor.fetchone()
+    print(f"Nombre total de jours calculés : {result[0]}")
+
+    con.commit()
+
+
+    cursor.close()
     con.close()
