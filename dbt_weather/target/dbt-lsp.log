@@ -1,0 +1,286 @@
+==================== 2026-06-17T08:34:16.885250Z | 00000000-0000-0000-0000-000000000000 ====================
+==================== 2026-06-17T08:34:16.892753Z | 5d0b039c-4413-47fd-9388-ed7b1d84055f ====================
+08:34:16.893407 [info ]: Starting dbt LSP server
+08:34:16.894203 [info ]: Connecting to LSP client on port 8000
+08:34:16.902877 [info ]: Successfully connected to LSP client
+08:34:16.903314 [info ]: Creating LSP service...
+08:34:17.183703 [info ]: Creating LSP server...
+08:34:17.183744 [info ]: Starting LSP server...
+08:34:17.448415 [info ]: Loading profiles.yml
+08:34:17.572474 [info ]: Started loading project
+08:34:17.585318 [info ]: Loading profiles.yml
+08:34:17.624095 [debug]:    Started loading packages
+08:34:17.637668 [debug]:     Loaded [  0.01s] packages
+08:34:17.656003 [info ]: Started parsing
+08:34:17.752253 [info ]: Finished loading project [  0.18s]
+08:34:17.794412 [debug]: Finished parsing models\schema.yml [  0.03s]
+08:34:17.855239 [debug]: Finished parsing models\marts\daily_temperature.sql [  0.05s]
+08:34:17.856817 [debug]: Finished parsing models\staging\stg_weather.sql [  0.00s]
+08:34:17.871023 [warn ]: [NoNodeForYamlKey (dbt1089)]: Unused schema.yml entry for model 'daily_temperatures'
+  --> models\schema.yml
+08:34:17.884306 [info ]: Finished parsing [  0.23s]
+08:34:17.889647 [info ]: Cached model count updated: 2 models (estimate)
+08:34:17.889690 [info ]: Cached model count updated: 2 models (accurate)
+08:34:17.893401 [info ]: Started scheduling
+08:34:17.901424 [info ]: Finished scheduling [  0.01s]
+08:34:17.901769 [debug]: Compilation - 1 nodes selected: {"model.weather_project.stg_weather"}
+08:34:17.902166 [info ]: Started scheduling
+08:34:17.903125 [info ]: Finished scheduling [  0.00s]
+08:34:17.977881 [info ]: Started building task graph
+08:34:17.984834 [info ]: Finished building task graph [  0.01s]
+08:34:17.996704 [info ]: Started rendering (1 nodes)
+08:34:17.997582 [info ]: Started model main.stg_weather
+08:34:17.998084 [debug]: Started rendering model main.stg_weather
+08:34:18.019501 [debug]: Compiled SQL for node model.weather_project.stg_weather at target\.lsp\compiled\weather_project\models\staging\stg_weather.sql
+08:34:18.023693 [debug]: Finished rendering [  0.03s] model main.stg_weather [success]
+08:34:18.023791 [info ]: Finished rendering [  0.03s] (1 nodes, 0 skipped, 0 errors)
+08:34:18.024859 [info ]: Started analyzing (1 nodes)
+08:34:18.024947 [debug]: Started analyzing model main.stg_weather
+08:34:18.102810 [debug]: Finished analyzing [  0.08s] model main.stg_weather [success]
+08:34:18.102857 [info ]: Finished analyzing [  0.08s] (1 nodes, 0 skipped, 0 errors)
+08:34:18.102875 [info ]:  Succeeded [  0.10s] model main.stg_weather (view)
+08:34:18.121456 [info ]: Started scheduling
+08:34:18.121576 [info ]: Finished scheduling [  0.00s]
+08:34:18.125551 [info ]: Cached model count updated: 2 models (accurate)
+08:34:19.712837 [info ]: Started loading project
+08:34:19.715569 [info ]: Loading profiles.yml
+08:34:19.842961 [info ]: Cached model count updated: 2 models (estimate)
+08:34:19.843018 [info ]: Cached model count updated: 2 models (accurate)
+08:34:19.843086 [info ]: Started scheduling
+08:34:19.843276 [info ]: Finished scheduling [  0.00s]
+08:34:19.843332 [debug]: Compilation - 2 nodes selected: {"model.weather_project.daily_temperature", "model.weather_project.stg_weather"}
+08:34:19.847850 [info ]: Started building task graph
+08:34:19.847964 [info ]: Finished building task graph [  0.00s]
+08:34:19.848425 [info ]: Started rendering (2 nodes)
+08:34:19.848496 [info ]: Started model main.daily_temperature
+08:34:19.848534 [debug]: Started rendering model main.daily_temperature
+08:34:19.848632 [info ]: Started model main.stg_weather
+08:34:19.848682 [debug]: Started rendering model main.stg_weather
+08:34:19.848687 [info ]: Finished loading project [  0.14s]
+08:34:19.850741 [debug]: Compiled SQL for node model.weather_project.stg_weather at target\.lsp\compiled\weather_project\models\staging\stg_weather.sql
+08:34:19.851011 [debug]: Finished rendering [  0.00s] model main.stg_weather [success]
+08:34:19.851104 [info ]: Started analyzing (2 nodes)
+08:34:19.851141 [debug]: Started analyzing model main.stg_weather
+08:34:19.852627 [debug]: Finished analyzing [  0.00s] model main.stg_weather [success]
+08:34:19.852735 [info ]:  Succeeded [  0.00s] model main.stg_weather (view)
+08:34:19.859214 [debug]: Compiled SQL for node model.weather_project.daily_temperature at target\.lsp\compiled\weather_project\models\marts\daily_temperature.sql
+08:34:19.859717 [debug]: Finished rendering [  0.01s] model main.daily_temperature [success]
+08:34:19.859819 [info ]: Finished rendering [  0.01s] (2 nodes, 0 skipped, 0 errors)
+08:34:19.859916 [debug]: Started analyzing model main.daily_temperature
+08:34:19.886467 [debug]: Finished analyzing [  0.03s] model main.daily_temperature [success]
+08:34:19.886554 [info ]: Finished analyzing [  0.04s] (2 nodes, 0 skipped, 0 errors)
+08:34:19.886589 [info ]:  Succeeded [  0.04s] model main.daily_temperature (table)
+08:34:19.900733 [info ]: Started scheduling
+08:34:19.901054 [info ]: Finished scheduling [  0.00s]
+08:34:19.903579 [info ]: Cached model count updated: 2 models (accurate)
+08:34:21.494324 [info ]: Started loading project
+08:34:21.497190 [info ]: Loading profiles.yml
+08:34:21.568664 [info ]: Cached model count updated: 2 models (estimate)
+08:34:21.568706 [info ]: Cached model count updated: 2 models (accurate)
+08:34:21.568739 [info ]: Started scheduling
+08:34:21.568806 [info ]: Finished scheduling [  0.00s]
+08:34:21.568836 [debug]: Compilation - 2 nodes selected: {"model.weather_project.daily_temperature", "model.weather_project.stg_weather"}
+08:34:21.570920 [info ]: Started building task graph
+08:34:21.570995 [info ]: Finished building task graph [  0.00s]
+08:34:21.571232 [info ]: Started rendering (2 nodes)
+08:34:21.571269 [info ]: Started model main.daily_temperature
+08:34:21.571288 [debug]: Started rendering model main.daily_temperature
+08:34:21.571363 [info ]: Started model main.stg_weather
+08:34:21.571389 [debug]: Started rendering model main.stg_weather
+08:34:21.571435 [info ]: Finished loading project [  0.08s]
+08:34:21.572419 [debug]: Compiled SQL for node model.weather_project.stg_weather at target\.lsp\compiled\weather_project\models\staging\stg_weather.sql
+08:34:21.572579 [debug]: Finished rendering [  0.00s] model main.stg_weather [success]
+08:34:21.572645 [info ]: Started analyzing (2 nodes)
+08:34:21.572678 [debug]: Started analyzing model main.stg_weather
+08:34:21.573275 [debug]: Compiled SQL for node model.weather_project.daily_temperature at target\.lsp\compiled\weather_project\models\marts\daily_temperature.sql
+08:34:21.573314 [debug]: Finished analyzing [  0.00s] model main.stg_weather [success]
+08:34:21.573357 [info ]:  Succeeded [  0.00s] model main.stg_weather (view)
+08:34:21.573447 [debug]: Finished rendering [  0.00s] model main.daily_temperature [success]
+08:34:21.573486 [info ]: Finished rendering [  0.00s] (2 nodes, 0 skipped, 0 errors)
+08:34:21.573522 [debug]: Started analyzing model main.daily_temperature
+08:34:21.574024 [debug]: Finished analyzing [  0.00s] model main.daily_temperature [success]
+08:34:21.574070 [info ]: Finished analyzing [  0.00s] (2 nodes, 0 skipped, 0 errors)
+08:34:21.574097 [info ]:  Succeeded [  0.00s] model main.daily_temperature (table)
+08:34:21.582634 [info ]: Started scheduling
+08:34:21.582719 [info ]: Finished scheduling [  0.00s]
+08:34:21.584793 [info ]: Cached model count updated: 2 models (accurate)
+==================== 2026-06-24T16:14:30.416476Z | 00000000-0000-0000-0000-000000000000 ====================
+==================== 2026-06-24T16:14:30.421808Z | 69d8e4bf-714e-4ede-ac46-63f67a3f92f4 ====================
+16:14:30.422183 [info ]: Starting dbt LSP server
+16:14:30.422845 [info ]: Connecting to LSP client on port 8000
+16:14:30.425455 [info ]: Successfully connected to LSP client
+16:14:30.425816 [info ]: Creating LSP service...
+16:14:30.527325 [info ]: Creating LSP server...
+16:14:30.527343 [info ]: Starting LSP server...
+16:14:30.636157 [info ]: Loading profiles.yml
+16:14:30.705077 [info ]: Started loading project
+16:14:30.713453 [info ]: Loading profiles.yml
+16:14:30.734038 [debug]:    Started loading packages
+16:14:30.740606 [debug]:     Loaded [  0.01s] packages
+16:14:30.752513 [info ]: Started parsing
+16:14:30.799925 [info ]: Finished loading project [  0.09s]
+16:14:30.822056 [debug]: Finished parsing models\schema.yml [  0.01s]
+16:14:30.843509 [debug]: Finished parsing models\marts\daily_temperature.sql [  0.02s]
+16:14:30.849350 [debug]: Finished parsing models\staging\stg_weather.sql [  0.01s]
+16:14:30.858629 [warn ]: [NoNodeForYamlKey (dbt1089)]: Unused schema.yml entry for model 'daily_temperatures'
+  --> models\schema.yml
+16:14:30.866491 [info ]: Finished parsing [  0.11s]
+16:14:30.869845 [info ]: Cached model count updated: 2 models (estimate)
+16:14:30.869864 [info ]: Cached model count updated: 2 models (accurate)
+16:14:30.871966 [info ]: Started scheduling
+16:14:30.877666 [info ]: Finished scheduling [  0.01s]
+16:14:30.877898 [debug]: Compilation - 2 nodes selected: {"model.weather_project.daily_temperature", "model.weather_project.stg_weather"}
+16:14:30.878178 [info ]: Started scheduling
+16:14:30.878656 [info ]: Finished scheduling [  0.00s]
+16:14:30.924282 [info ]: Started building task graph
+16:14:30.929075 [info ]: Finished building task graph [  0.00s]
+16:14:30.937346 [info ]: Started rendering (2 nodes)
+16:14:30.937682 [info ]: Started model main.daily_temperature
+16:14:30.938083 [debug]: Started rendering model main.daily_temperature
+16:14:30.938557 [info ]: Started model main.stg_weather
+16:14:30.938576 [debug]: Started rendering model main.stg_weather
+16:14:30.946306 [debug]: Compiled SQL for node model.weather_project.stg_weather at target\.lsp\compiled\weather_project\models\staging\stg_weather.sql
+16:14:30.946307 [debug]: Compiled SQL for node model.weather_project.daily_temperature at target\.lsp\compiled\weather_project\models\marts\daily_temperature.sql
+16:14:30.948184 [debug]: Finished rendering [  0.01s] model main.daily_temperature [success]
+16:14:30.948583 [info ]: Started analyzing (2 nodes)
+16:14:30.948599 [debug]: Started analyzing model main.daily_temperature
+16:14:30.948626 [debug]: Finished rendering [  0.01s] model main.stg_weather [success]
+16:14:30.948637 [info ]: Finished rendering [  0.01s] (2 nodes, 0 skipped, 0 errors)
+16:14:30.948648 [debug]: Started analyzing model main.stg_weather
+16:14:30.978382 [debug]: Finished analyzing [  0.03s] model main.stg_weather [success]
+16:14:30.978431 [info ]:  Succeeded [  0.04s] model main.stg_weather (view)
+16:14:30.978460 [debug]: Finished analyzing [  0.03s] model main.daily_temperature [success]
+16:14:30.978470 [info ]: Finished analyzing [  0.03s] (2 nodes, 0 skipped, 0 errors)
+16:14:30.978476 [info ]:  Succeeded [  0.04s] model main.daily_temperature (table)
+16:14:30.985508 [info ]: Started scheduling
+16:14:30.985537 [info ]: Finished scheduling [  0.00s]
+16:14:30.986576 [info ]: Cached model count updated: 2 models (accurate)
+16:14:32.634676 [info ]: Started loading project
+16:14:32.635399 [info ]: Loading profiles.yml
+16:14:32.664064 [info ]: Cached model count updated: 2 models (estimate)
+16:14:32.664085 [info ]: Cached model count updated: 2 models (accurate)
+16:14:32.664108 [info ]: Started scheduling
+16:14:32.664170 [info ]: Finished scheduling [  0.00s]
+16:14:32.664192 [debug]: Compilation - 2 nodes selected: {"model.weather_project.daily_temperature", "model.weather_project.stg_weather"}
+16:14:32.666476 [info ]: Started building task graph
+16:14:32.666606 [info ]: Finished building task graph [  0.00s]
+16:14:32.667016 [info ]: Started rendering (2 nodes)
+16:14:32.667075 [info ]: Started model main.daily_temperature
+16:14:32.667097 [debug]: Started rendering model main.daily_temperature
+16:14:32.667190 [info ]: Started model main.stg_weather
+16:14:32.667223 [info ]: Finished loading project [  0.03s]
+16:14:32.667240 [debug]: Started rendering model main.stg_weather
+16:14:32.668400 [debug]: Compiled SQL for node model.weather_project.stg_weather at target\.lsp\compiled\weather_project\models\staging\stg_weather.sql
+16:14:32.668507 [debug]: Finished rendering [  0.00s] model main.stg_weather [success]
+16:14:32.668599 [info ]: Started analyzing (2 nodes)
+16:14:32.668614 [debug]: Started analyzing model main.stg_weather
+16:14:32.668617 [debug]: Compiled SQL for node model.weather_project.daily_temperature at target\.lsp\compiled\weather_project\models\marts\daily_temperature.sql
+16:14:32.668674 [debug]: Finished rendering [  0.00s] model main.daily_temperature [success]
+16:14:32.668691 [info ]: Finished rendering [  0.00s] (2 nodes, 0 skipped, 0 errors)
+16:14:32.668712 [debug]: Started analyzing model main.daily_temperature
+16:14:32.668925 [debug]: Finished analyzing [  0.00s] model main.stg_weather [success]
+16:14:32.668945 [info ]:  Succeeded [  0.00s] model main.stg_weather (view)
+16:14:32.668970 [debug]: Finished analyzing [  0.00s] model main.daily_temperature [success]
+16:14:32.668980 [info ]: Finished analyzing [  0.00s] (2 nodes, 0 skipped, 0 errors)
+16:14:32.668988 [info ]:  Succeeded [  0.00s] model main.daily_temperature (table)
+16:14:32.673181 [info ]: Started scheduling
+16:14:32.673226 [info ]: Finished scheduling [  0.00s]
+16:14:32.673877 [info ]: Cached model count updated: 2 models (accurate)
+16:14:34.294564 [info ]: Started loading project
+16:14:34.295363 [info ]: Loading profiles.yml
+16:14:34.315202 [info ]: Cached model count updated: 2 models (estimate)
+16:14:34.315221 [info ]: Cached model count updated: 2 models (accurate)
+16:14:34.315236 [info ]: Started scheduling
+16:14:34.315270 [info ]: Finished scheduling [  0.00s]
+16:14:34.315280 [debug]: Compilation - 2 nodes selected: {"model.weather_project.daily_temperature", "model.weather_project.stg_weather"}
+16:14:34.316192 [info ]: Started building task graph
+16:14:34.316224 [info ]: Finished building task graph [  0.00s]
+16:14:34.316299 [info ]: Started rendering (2 nodes)
+16:14:34.316352 [info ]: Started model main.daily_temperature
+16:14:34.316363 [debug]: Started rendering model main.daily_temperature
+16:14:34.316384 [info ]: Started model main.stg_weather
+16:14:34.316391 [debug]: Started rendering model main.stg_weather
+16:14:34.316400 [info ]: Finished loading project [  0.02s]
+16:14:34.316943 [debug]: Compiled SQL for node model.weather_project.daily_temperature at target\.lsp\compiled\weather_project\models\marts\daily_temperature.sql
+16:14:34.316988 [debug]: Compiled SQL for node model.weather_project.stg_weather at target\.lsp\compiled\weather_project\models\staging\stg_weather.sql
+16:14:34.317053 [debug]: Finished rendering [  0.00s] model main.daily_temperature [success]
+16:14:34.317070 [info ]: Started analyzing (2 nodes)
+16:14:34.317093 [debug]: Started analyzing model main.daily_temperature
+16:14:34.317134 [debug]: Finished rendering [  0.00s] model main.stg_weather [success]
+16:14:34.317144 [info ]: Finished rendering [  0.00s] (2 nodes, 0 skipped, 0 errors)
+16:14:34.317173 [debug]: Started analyzing model main.stg_weather
+16:14:34.317364 [debug]: Finished analyzing [  0.00s] model main.daily_temperature [success]
+16:14:34.317380 [info ]:  Succeeded [-------] model main.daily_temperature (table)
+16:14:34.317394 [debug]: Finished analyzing [  0.00s] model main.stg_weather [success]
+16:14:34.317400 [info ]: Finished analyzing [  0.00s] (2 nodes, 0 skipped, 0 errors)
+16:14:34.317434 [info ]:  Succeeded [-------] model main.stg_weather (view)
+16:14:34.319674 [info ]: Started scheduling
+16:14:34.319696 [info ]: Finished scheduling [  0.00s]
+16:14:34.320205 [info ]: Cached model count updated: 2 models (accurate)
+17:44:09.559904 [info ]: Loading profiles.yml
+17:44:09.580434 [info ]: Started loading project
+17:44:09.581068 [info ]: Loading profiles.yml
+17:44:09.581455 [info ]: Finished loading project [  0.00s]
+17:44:09.581543 [info ]: Cached model count updated: 2 models (accurate)
+17:44:09.895906 [info ]: Loading profiles.yml
+17:44:10.494048 [info ]: Loading profiles.yml
+17:44:11.210854 [info ]: Loading profiles.yml
+17:44:11.214483 [info ]: Started loading project
+17:44:11.215496 [info ]: Loading profiles.yml
+17:44:11.215802 [info ]: Finished loading project [  0.00s]
+17:44:11.215812 [info ]: Cached model count updated: 2 models (accurate)
+17:44:11.544455 [info ]: Loading profiles.yml
+17:44:12.140028 [info ]: Loading profiles.yml
+17:44:13.599912 [info ]: Loading profiles.yml
+17:44:26.593519 [info ]: Loading profiles.yml
+17:44:32.039426 [info ]: Loading profiles.yml
+17:44:35.612433 [info ]: Loading profiles.yml
+17:44:35.621539 [info ]: Started loading project
+17:44:35.622121 [info ]: Loading profiles.yml
+17:44:35.622419 [info ]: Finished loading project [  0.00s]
+17:44:35.622458 [info ]: Cached model count updated: 2 models (accurate)
+17:44:35.956462 [info ]: Loading profiles.yml
+17:44:36.521885 [info ]: Loading profiles.yml
+17:44:37.249893 [info ]: Loading profiles.yml
+17:44:37.252712 [info ]: Started loading project
+17:44:37.253241 [info ]: Loading profiles.yml
+17:44:37.253502 [info ]: Cached model count updated: 2 models (accurate)
+17:44:37.253572 [info ]: Finished loading project [  0.00s]
+17:44:37.601749 [info ]: Loading profiles.yml
+17:44:38.174885 [info ]: Loading profiles.yml
+17:51:19.717964 [info ]: Loading profiles.yml
+17:52:49.690058 [info ]: Loading profiles.yml
+17:55:26.909322 [info ]: Loading profiles.yml
+19:35:34.928237 [info ]: Loading profiles.yml
+19:36:24.800724 [info ]: Loading profiles.yml
+19:40:38.051316 [info ]: Loading profiles.yml
+19:41:52.093802 [info ]: Loading profiles.yml
+19:50:29.272309 [info ]: Loading profiles.yml
+19:53:08.120808 [info ]: Loading profiles.yml
+20:00:03.791696 [info ]: Loading profiles.yml
+20:36:27.170077 [info ]: Loading profiles.yml
+20:50:35.345776 [info ]: Loading profiles.yml
+21:00:03.025811 [info ]: Loading profiles.yml
+21:03:48.669922 [info ]: Loading profiles.yml
+21:03:50.731090 [info ]: Loading profiles.yml
+21:04:09.925038 [info ]: Loading profiles.yml
+21:10:21.532001 [info ]: Loading profiles.yml
+21:19:19.776761 [info ]: Loading profiles.yml
+21:26:21.358747 [info ]: Loading profiles.yml
+22:00:03.103878 [info ]: Loading profiles.yml
+==================== 2026-06-26T09:08:58.333771Z | 00000000-0000-0000-0000-000000000000 ====================
+==================== 2026-06-26T09:08:58.340313Z | 40eae32f-1f3c-4a60-9c84-dcb16b7bd73a ====================
+09:08:58.340810 [info ]: Starting dbt LSP server
+09:08:58.341562 [info ]: Connecting to LSP client on port 8000
+09:08:58.346337 [info ]: Successfully connected to LSP client
+09:08:58.346935 [info ]: Creating LSP service...
+09:08:58.558081 [info ]: Creating LSP server...
+09:08:58.558157 [info ]: Starting LSP server...
+09:08:58.682484 [info ]: Loading profiles.yml
+09:09:55.133772 [info ]: Loading profiles.yml
+09:10:43.218898 [info ]: Loading profiles.yml
+09:17:51.519780 [info ]: Loading profiles.yml
+09:18:12.449880 [info ]: Loading profiles.yml
+09:18:12.858030 [info ]: Loading profiles.yml
+09:24:00.797958 [info ]: Loading profiles.yml
+09:24:01.182525 [info ]: Loading profiles.yml
