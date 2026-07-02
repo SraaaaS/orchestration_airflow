@@ -343,6 +343,154 @@ Ce projet m'a permis d'acquérir une expérience pratique de :
 - les bonnes pratiques de Data Engineering.
 
 ---
+# Installation et exécution
+
+## Prérequis
+
+Assurez-vous d'avoir installé :
+
+- Docker Desktop
+- Docker Compose
+- Git
+
+Clonez ensuite le dépôt :
+
+```bash
+git clone https://github.com/SraaaaS/orchestration_airflow.git
+cd orchestration_airflow
+```
+
+---
+
+## Configuration des variables d'environnement
+
+Le fichier `.env` n'est pas présent dans le dépôt Git afin de ne pas exposer d'informations de configuration.
+
+Créez un fichier nommé `.env` à la racine du projet avec le contenu suivant :
+
+```env
+AIRFLOW_UID=50000
+
+AIRFLOW_IMAGE_NAME=apache/airflow:2.9.1
+
+WEATHER_DB_PATH=/opt/airflow/data/weather.db
+
+CSV_PATH=/opt/airflow/data/raw_weather_data.csv
+```
+
+> **Remarque :**
+> Depuis la migration vers PostgreSQL, la variable `WEATHER_DB_PATH` n'est plus utilisée par les scripts Python, mais elle est conservée pour assurer la compatibilité avec les versions précédentes du projet.
+
+Vous pouvez adapter ces valeurs si vous souhaitez modifier les chemins ou la configuration de votre environnement.
+
+---
+
+## Construire les conteneurs
+
+Construisez l'image Docker :
+
+```bash
+docker compose build
+```
+
+---
+
+## Initialiser Airflow
+
+Lors du premier lancement uniquement :
+
+```bash
+docker compose up airflow-init
+```
+
+Cette étape initialise la base de données Airflow et crée l'utilisateur administrateur.
+
+---
+
+## Lancer les services
+
+Démarrez ensuite tous les services :
+
+```bash
+docker compose up
+```
+
+ou en arrière-plan :
+
+```bash
+docker compose up -d
+```
+
+Les services suivants seront lancés :
+
+- PostgreSQL
+- Airflow Scheduler
+- Airflow Webserver
+
+---
+
+## Accéder à Airflow
+
+Ouvrez votre navigateur :
+
+```
+http://localhost:8080
+```
+
+Identifiants par défaut :
+
+```
+Utilisateur : airflow
+Mot de passe : airflow
+```
+
+---
+
+## Déclencher le DAG
+
+Une fois Airflow démarré :
+
+1. Activez le DAG `weather_etl_pipeline`.
+2. Cliquez sur **Trigger DAG**.
+3. Suivez l'exécution des tâches :
+
+```
+extract
+    ↓
+load
+    ↓
+run_dbt
+    ↓
+check_data
+```
+
+---
+
+## Vérifier les données dans PostgreSQL
+
+Vous pouvez accéder à PostgreSQL depuis le conteneur :
+
+```bash
+docker exec -it orchestration_airflow-postgres-1 psql -U airflow
+```
+
+Puis :
+
+```sql
+\c weather_db
+
+SELECT * FROM weather LIMIT 10;
+```
+
+Les tables créées par dbt sont également disponibles :
+
+```sql
+SELECT * FROM stg_weather LIMIT 10;
+
+SELECT * FROM daily_temperature LIMIT 10;
+```
+
+---
 
 # Auteur
 
