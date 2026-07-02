@@ -1,38 +1,31 @@
-# Pipeline ETL Météo avec Airflow, Docker et DuckDB
+# Pipeline ELT Météo avec Airflow, dbt, PostgreSQL et Docker
 
 ## Présentation du projet
 
-Ce projet est une pipeline ETL (Extract, Transform, Load) de bout en bout développée avec :
+Ce projet met en œuvre une pipeline ELT (Extract, Load, Transform) automatisée permettant de collecter, stocker et transformer des données météorologiques historiques.
 
-* Apache Airflow
-* Docker & Docker Compose
-* Python
-* DuckDB
-* Pandas
-* API Open-Meteo
+L'architecture repose sur des technologies largement utilisées en entreprise :
 
-L’objectif du projet est d’automatiser la récupération, la transformation et le stockage de données météorologiques historiques à travers une architecture proche des environnements utilisés en entreprise.
+- Apache Airflow
+- dbt (Data Build Tool)
+- PostgreSQL
+- Docker & Docker Compose
+- Python
+- Pandas
+- API Open-Meteo
 
-La pipeline :
+La pipeline automatise l'ensemble du traitement des données :
 
-* récupère automatiquement les données météo historiques,
-* transforme les données horaires en indicateurs journaliers,
-* stocke les résultats dans une base DuckDB,
-* orchestre toutes les étapes via Airflow,
-* s’exécute automatiquement selon une planification définie.
+- extraction incrémentale depuis l'API Open-Meteo ;
+- chargement dans PostgreSQL ;
+- transformations analytiques avec dbt ;
+- orchestration complète via Airflow.
 
-Ce projet simule un workflow réel de Data Engineering avec :
-
-* orchestration de tâches,
-* automatisation,
-* chargement incrémental,
-* gestion des dépendances,
-* conteneurisation,
-* monitoring via Airflow.
+Le projet reproduit une architecture moderne de Data Engineering proche des environnements de production.
 
 ---
 
-# Architecture du projet
+# Architecture
 
 ```text
                 +-------------------+
@@ -41,25 +34,27 @@ Ce projet simule un workflow réel de Data Engineering avec :
                           |
                           v
                 +-------------------+
-                | Tâche Extract     |
+                | Extract (Python)  |
                 | raw_weather.csv   |
                 +---------+---------+
                           |
                           v
                 +-------------------+
-                | Tâche Transform   |
-                | daily_weather.csv |
+                | Load (Python)     |
+                | PostgreSQL        |
+                | table weather     |
                 +---------+---------+
                           |
                           v
                 +-------------------+
-                | Tâche Load        |
-                | Base DuckDB       |
+                | dbt               |
+                | stg_weather       |
+                | daily_temperature |
                 +---------+---------+
                           |
                           v
                 +-------------------+
-                | Tâche Check Data  |
+                | Check Data        |
                 +-------------------+
 ```
 
@@ -67,16 +62,17 @@ Ce projet simule un workflow réel de Data Engineering avec :
 
 # Technologies utilisées
 
-| Technologie    | Rôle                            |
-| -------------- | ------------------------------- |
-| Python         | Développement de la logique ETL |
-| Apache Airflow | Orchestration des workflows     |
-| Docker         | Conteneurisation                |
-| Docker Compose | Gestion multi-conteneurs        |
-| DuckDB         | Base de données analytique      |
-| Pandas         | Transformation des données      |
-| API Open-Meteo | Source des données météo        |
-| PostgreSQL     | Base de métadonnées Airflow     |
+| Technologie | Rôle |
+|-------------|------|
+| Python | Développement des scripts ETL |
+| Apache Airflow | Orchestration des workflows |
+| dbt | Transformations SQL |
+| PostgreSQL | Base de données |
+| Docker | Conteneurisation |
+| Docker Compose | Orchestration des conteneurs |
+| Pandas | Manipulation des données |
+| psycopg2 | Connexion PostgreSQL |
+| API Open-Meteo | Source des données météo |
 
 ---
 
@@ -84,24 +80,33 @@ Ce projet simule un workflow réel de Data Engineering avec :
 
 ```text
 weather-etl-project/
-│
+
 ├── dags/
 │   └── etl_dag.py
 │
 ├── scripts/
 │   ├── extract.py
-│   ├── transform.py
 │   ├── load.py
-│   └── check_data.py
+│   ├── check_data.py
+│   └── run_dbt.py
+│
+├── dbt_weather/
+│   ├── models/
+│   │   ├── staging/
+│   │   │      stg_weather.sql
+│   │   ├── marts/
+│   │   │      daily_temperature.sql
+│   │   ├── schema.yml
+│   │
+│   ├── dbt_project.yml
+│   └── profiles.yml
 │
 ├── data/
-│   ├── raw_weather_data.csv
-│   ├── daily_weather_data.csv
-│   └── weather.db
+│   └── raw_weather_data.csv
 │
-├── requirements.txt
 ├── Dockerfile
 ├── docker-compose.yml
+├── requirements.txt
 └── README.md
 ```
 
@@ -111,273 +116,234 @@ weather-etl-project/
 
 ## 1. Extract
 
-L’étape d’extraction :
+Le script :
 
-* interroge l’API Open-Meteo,
-* récupère les températures horaires historiques,
-* supprime les timestamps futurs,
-* ajoute uniquement les nouvelles données,
-* stocke les données brutes dans :
+- interroge l'API Open-Meteo ;
+- recherche la dernière date présente dans PostgreSQL ;
+- télécharge uniquement les nouvelles observations ;
+- supprime les timestamps futurs ;
+- sauvegarde les données dans un fichier CSV.
 
-```text
-/opt/airflow/data/raw_weather_data.csv
-```
-
-### Fonctionnalités
-
-* ingestion incrémentale,
-* prévention des doublons,
-* gestion des timestamps UTC,
-* mise à jour automatique des données historiques.
+Le chargement est donc incrémental.
 
 ---
 
-## 2. Transform
+## 2. Load
 
-L’étape de transformation :
+Le script :
 
-* convertit les timestamps en datetime,
-* groupe les données par jour,
-* calcule les températures moyennes journalières,
-* arrondit les valeurs à deux décimales,
-* sauvegarde les données transformées dans :
-
-```text
-/opt/airflow/data/daily_weather_data.csv
-```
-
-Exemple de résultat :
-
-| date       | T_moyenne |
-| ---------- | --------- |
-| 2026-05-19 | 16.95     |
-| 2026-05-20 | 17.12     |
-
----
-
-## 3. Load
-
-L’étape de chargement :
-
-* se connecte à DuckDB,
-* crée la table weather si elle n’existe pas,
-* insère uniquement les nouvelles lignes,
-* évite d’écraser l’historique précédent.
-
-Chemin de la base :
-
-```text
-/opt/airflow/data/weather.db
-```
-
-Schéma SQL :
+- lit le fichier CSV ;
+- crée automatiquement la table `weather` si nécessaire ;
+- insère les nouvelles données dans PostgreSQL ;
+- met à jour les observations existantes grâce à :
 
 ```sql
-CREATE TABLE weather (
-    date DATE,
-    T_moyenne DECIMAL(5,2)
-)
+ON CONFLICT (time)
+DO UPDATE
 ```
+
+Cette approche évite les doublons tout en conservant l'historique.
+
+---
+
+## 3. Transform avec dbt
+
+Les transformations sont entièrement réalisées par dbt.
+
+### Modèle staging
+
+`stg_weather`
+
+Nettoie les données :
+
+- conversion des dates ;
+- standardisation des colonnes.
+
+### Modèle mart
+
+`daily_temperature`
+
+Construit une table analytique contenant :
+
+- une ligne par jour ;
+- la température moyenne journalière.
+
+Ces modèles sont matérialisés automatiquement dans PostgreSQL.
 
 ---
 
 ## 4. Check Data
 
-La dernière tâche :
+Cette dernière étape vérifie :
 
-* interroge la base DuckDB,
-* vérifie les lignes insérées,
-* contrôle que le chargement s’est correctement effectué.
+- que les données sont bien chargées ;
+- que les tables contiennent des observations ;
+- que la pipeline s'est exécutée correctement.
 
 ---
 
 # DAG Airflow
 
-Le DAG orchestre toutes les tâches ETL :
+Le workflow est composé de quatre tâches :
 
 ```text
-extract >> transform >> load >> check_data
+extract
+    ↓
+load
+    ↓
+run_dbt
+    ↓
+check_data
 ```
 
-### Fonctionnalités du DAG
+Le DAG assure :
 
-* exécution planifiée toutes les heures,
-* gestion automatique des retries,
-* monitoring des tâches,
-* gestion des dépendances,
-* centralisation des logs.
-
-Exemple :
-
-```python
-schedule_interval = "@hourly"
-```
+- l'ordre d'exécution ;
+- les dépendances ;
+- les reprises en cas d'échec ;
+- la journalisation.
 
 ---
 
-# Mise en place avec Docker
+# dbt
 
-Le projet fonctionne entièrement dans des conteneurs Docker.
+Le projet dbt contient deux modèles :
 
-Services utilisés :
+```
+models/
 
-* airflow-webserver
-* airflow-scheduler
-* airflow-init
-* postgres
+staging/
+    stg_weather.sql
 
-Avantages :
+marts/
+    daily_temperature.sql
+```
 
-* environnement reproductible,
-* isolation des dépendances,
-* architecture proche de la production,
-* déploiement simplifié.
+Le modèle `stg_weather` constitue la couche de préparation des données.
+
+Le modèle `daily_temperature` construit une table analytique directement exploitable.
+
+Cette organisation suit les bonnes pratiques dbt.
 
 ---
 
-# Dockerfile
+# PostgreSQL
 
-L’image Docker personnalisée :
+PostgreSQL est utilisé pour :
 
-* étend l’image officielle Airflow,
-* installe les dépendances du projet,
-* copie les DAGs et scripts,
-* standardise l’environnement d’exécution.
+- stocker les données météo ;
+- héberger les tables créées par dbt ;
+- servir de base relationnelle unique pour toute la pipeline.
 
-Exemple :
+Le projet exploite :
 
-```dockerfile
-FROM apache/airflow:2.9.1
-
-USER airflow
-
-WORKDIR /opt/airflow
-
-COPY requirements.txt .
-COPY dags/ /opt/airflow/dags
-COPY scripts/ /opt/airflow/scripts
-COPY data/ /opt/airflow/data
-
-RUN pip install --no-cache-dir -r requirements.txt
-```
+- les clés primaires ;
+- les contraintes ;
+- les UPSERT (`ON CONFLICT`) ;
+- les transactions SQL.
 
 ---
 
-# Exécution du projet
+# Docker
 
-## 1. Initialiser Airflow
+L'ensemble de la solution est conteneurisé.
 
-```bash
-docker-compose up airflow-init
-```
+Les principaux services sont :
 
----
+- postgres
+- airflow-init
+- airflow-webserver
+- airflow-scheduler
 
-## 2. Construire le conteneur et lancer les services
+Cette architecture garantit :
 
-```bash
-docker-compose up --build
-```
-
----
-
-## 3. Accéder à l’interface Airflow
-
-```text
-http://localhost:8080
-```
-
-Identifiants par défaut :
-
-```text
-Username: airflow
-Password: airflow
-```
+- un environnement reproductible ;
+- une installation simplifiée ;
+- une séparation claire des services.
 
 ---
 
 # Chargement incrémental
 
-Une amélioration importante du projet a consisté à implémenter un chargement incrémental.
+Le projet implémente un véritable chargement incrémental.
 
-Au lieu de :
+À chaque exécution :
 
-* supprimer la table,
-* recharger tout l’historique,
+- la dernière date enregistrée est recherchée ;
+- seules les nouvelles observations sont téléchargées ;
+- PostgreSQL met à jour les éventuels doublons via un UPSERT.
 
-la pipeline :
+Cela évite le rechargement complet de l'historique.
 
-* ajoute uniquement les nouvelles lignes,
-* évite les doublons,
-* conserve l’historique précédent.
+---
 
-Cette approche se rapproche des pipelines ETL modernes utilisés en entreprise.
+# Compétences mises en œuvre
+
+Ce projet démontre des compétences en :
+
+- Data Engineering
+- ETL / ELT
+- Apache Airflow
+- dbt
+- PostgreSQL
+- SQL
+- Python
+- Docker
+- orchestration de workflows
+- chargement incrémental
+- modélisation de données
+- gestion de pipelines de production
+- debugging et résolution d'erreurs
 
 ---
 
 # Difficultés rencontrées
 
-Durant le développement, plusieurs problématiques proches des environnements réels ont été résolues :
+Au cours du développement, plusieurs problématiques proches d'un contexte professionnel ont été résolues :
 
-* incohérences de chemins Docker,
-* création accidentelle de plusieurs bases DuckDB,
-* conflits de types entre VARCHAR et DATE,
-* verrouillage concurrent de DuckDB,
-* problèmes de configuration Airflow,
-* logique d’actualisation incrémentale,
-* gestion des timestamps futurs,
-* permissions Docker et gestion des utilisateurs Airflow.
-
----
-
-# Compétences démontrées
-
-Ce projet met en avant des compétences en :
-
-* Data Engineering,
-* développement ETL,
-* orchestration de workflows,
-* Docker,
-* Airflow,
-* SQL et DuckDB,
-* traitement de données avec Python,
-* pipelines incrémentales,
-* debugging de systèmes distribués,
-* architecture orientée production.
+- migration complète de DuckDB vers PostgreSQL ;
+- configuration de dbt avec PostgreSQL ;
+- authentification entre les conteneurs Docker ;
+- gestion des volumes Docker ;
+- synchronisation Airflow / dbt ;
+- chargement incrémental ;
+- UPSERT PostgreSQL ;
+- résolution de conflits Git ;
+- gestion des permissions Docker ;
+- debugging de pipelines distribuées.
 
 ---
 
 # Améliorations possibles
 
-Pistes d’évolution du projet :
+Plusieurs évolutions peuvent encore être apportées :
 
-* ajout d’un dashboard de visualisation,
-* migration vers PostgreSQL,
-* déploiement cloud,
-* mise en place de CI/CD,
-* ajout de tests unitaires,
-* validation de qualité des données,
-* stockage en format Parquet,
-* monitoring et alerting,
-* détection d’anomalies météo.
+- ajout d'un dashboard Metabase ;
+- tests de qualité des données avec dbt tests ;
+- documentation dbt (`dbt docs`);
+- CI/CD GitHub Actions ;
+- stockage au format Parquet ;
+- monitoring avancé ;
+- alertes automatiques ;
+- déploiement sur le cloud (AWS, Azure ou GCP).
 
 ---
 
-# Ce que ce projet a permis d’apprendre
+# Ce que ce projet m'a permis d'apprendre
 
-Ce projet a permis de développer une compréhension concrète :
+Ce projet m'a permis d'acquérir une expérience pratique de :
 
-* du fonctionnement d’Airflow,
-* de l’orchestration de pipelines,
-* des interactions entre conteneurs Docker,
-* de la persistance des volumes,
-* des pipelines ETL de production,
-* de la planification automatique,
-* de la gestion des erreurs et retries,
-* du debugging de systèmes orchestrés.
+- la conception d'une pipeline ELT complète ;
+- l'orchestration avec Airflow ;
+- la modélisation de données avec dbt ;
+- PostgreSQL ;
+- Docker et Docker Compose ;
+- l'automatisation des traitements ;
+- le chargement incrémental ;
+- les bonnes pratiques de Data Engineering.
 
 ---
 
 # Auteur
 
-Projet réalisé dans le cadre d’un apprentissage pratique du Data Engineering et de l’orchestration de pipelines ETL dans un environnement conteneurisé proche de la production.
+Projet personnel réalisé dans le cadre d'un apprentissage approfondi du Data Engineering et des architectures de pipelines de données modernes.
