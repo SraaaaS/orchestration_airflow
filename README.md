@@ -300,20 +300,24 @@ cd orchestration_airflow
 
 ## Configuration des variables d'environnement
 
-Le fichier `.env` n'est pas présent dans le dépôt Git afin de ne pas exposer d'informations de configuration.
+Un fichier `.env.example` dont vous pouvez modifier les valeurs des variables a été fourni dans le dépôt Git afin de ne pas exposer d'informations de configuration.
 
-Créez un fichier nommé `.env` à la racine du projet avec le contenu suivant :
+Depuis la racine du projet, , créez un fichier `.env` par copie du contenu de `.env.example`:
 
 ```env
-AIRFLOW_UID=50000
-
-AIRFLOW_IMAGE_NAME=apache/airflow:2.9.1
-
-WEATHER_DB_PATH=/opt/airflow/data/weather.db
-
-CSV_PATH=/opt/airflow/data/raw_weather_data.csv
+cp .env.example .env
 ```
+L'arborescence du projet doit alors contenir :
 
+```text
+weather-etl-project/
+├── .env
+├── .env.example
+├── docker-compose.yml
+├── Dockerfile
+├── README.md
+...
+```
 > **Remarque :**
 > Depuis la migration vers PostgreSQL, la variable `WEATHER_DB_PATH` n'est plus utilisée par les scripts Python, mais elle est conservée pour assurer la compatibilité avec les versions précédentes du projet.
 
