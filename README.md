@@ -277,70 +277,6 @@ Cela évite le rechargement complet de l'historique.
 
 ---
 
-# Compétences mises en œuvre
-
-Ce projet démontre des compétences en :
-
-- Data Engineering
-- ETL / ELT
-- Apache Airflow
-- dbt
-- PostgreSQL
-- SQL
-- Python
-- Docker
-- orchestration de workflows
-- chargement incrémental
-- modélisation de données
-- gestion de pipelines de production
-- debugging et résolution d'erreurs
-
----
-
-# Difficultés rencontrées
-
-Au cours du développement, plusieurs problématiques proches d'un contexte professionnel ont été résolues :
-
-- migration complète de DuckDB vers PostgreSQL ;
-- configuration de dbt avec PostgreSQL ;
-- authentification entre les conteneurs Docker ;
-- gestion des volumes Docker ;
-- synchronisation Airflow / dbt ;
-- chargement incrémental ;
-- UPSERT PostgreSQL ;
-- résolution de conflits Git ;
-- gestion des permissions Docker ;
-- debugging de pipelines distribuées.
-
----
-
-# Améliorations possibles
-
-Plusieurs évolutions peuvent encore être apportées :
-
-- ajout d'un dashboard Metabase ;
-- tests de qualité des données avec dbt tests ;
-- documentation dbt (`dbt docs`);
-- CI/CD GitHub Actions ;
-- stockage au format Parquet ;
-- monitoring avancé ;
-- alertes automatiques ;
-- déploiement sur le cloud (AWS, Azure ou GCP).
-
----
-
-# Ce que ce projet m'a permis d'apprendre
-
-Ce projet m'a permis d'acquérir une expérience pratique de :
-
-- la conception d'une pipeline ELT complète ;
-- l'orchestration avec Airflow ;
-- la modélisation de données avec dbt ;
-- PostgreSQL ;
-- Docker et Docker Compose ;
-- l'automatisation des traitements ;
-- le chargement incrémental ;
-- les bonnes pratiques de Data Engineering.
 
 ---
 # Installation et exécution
@@ -492,6 +428,74 @@ SELECT * FROM daily_temperature LIMIT 10;
 
 ---
 
-# Auteur
+# Compétences mises en œuvre
+
+Ce projet démontre des compétences en :
+
+- Data Engineering
+- ETL / ELT
+- Apache Airflow
+- dbt
+- PostgreSQL
+- SQL
+- Python
+- Docker
+- orchestration de workflows
+- chargement incrémental
+- modélisation de données
+- gestion de pipelines de production
+- debugging et résolution d'erreurs
+
+---
+
+# Difficultés rencontrées
+
+Au cours du développement, plusieurs problématiques proches d'un contexte professionnel ont été résolues :
+
+- migration complète de DuckDB vers PostgreSQL ;
+- configuration de dbt avec PostgreSQL ;
+- authentification entre les conteneurs Docker ;
+- gestion des volumes Docker ;
+- synchronisation Airflow / dbt ;
+- chargement incrémental ;
+- UPSERT PostgreSQL ;
+- résolution de conflits Git ;
+- gestion des permissions Docker ;
+- debugging de pipelines distribuées.
+
+---
+
+# Améliorations possibles
+
+Plusieurs évolutions peuvent encore être apportées :
+
+- ajout d'un dashboard Metabase ;
+- tests de qualité des données avec dbt tests ;
+- documentation dbt (`dbt docs`);
+- CI/CD GitHub Actions ;
+- stockage au format Parquet ;
+- monitoring avancé ;
+- alertes automatiques ;
+- déploiement sur le cloud (AWS, Azure ou GCP).
+
+---
+
+# Ce que ce projet m'a permis d'apprendre
+
+Ce projet m'a permis d'acquérir une expérience pratique de :
+
+- la conception d'une pipeline ELT complète ;
+- l'orchestration avec Airflow ;
+- la modélisation de données avec dbt ;
+- PostgreSQL ;
+- Docker et Docker Compose ;
+- l'automatisation des traitements ;
+- le chargement incrémental ;
+- les bonnes pratiques de Data Engineering.
+
+---
+
+  # Auteur
 
 Projet personnel réalisé dans le cadre d'un apprentissage approfondi du Data Engineering et des architectures de pipelines de données modernes.
+
