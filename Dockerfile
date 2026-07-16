@@ -13,4 +13,4 @@ COPY data/ /opt/airflow/data
 RUN pip install --upgrade pip
 RUN pip install -vvv --no-cache-dir -r requirements.txt
 RUN pip install  psycopg2-binary
-RUN pip install dbt-postgres
+RUN pip install dbt-postgres==1.8.2

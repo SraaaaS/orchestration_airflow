@@ -1,1 +1,1 @@
-{"_invocation_id": "0b64750a-1fe0-40b3-9b10-38041e7ba2b2", "linked": {"0": {"name": "model.weather_project.stg_weather", "type": "model", "succ": [1]}, "1": {"name": "model.weather_project.daily_temperature", "type": "model"}}}
+{"_invocation_id": "888048a4-1c6b-47ba-8169-0107ea523625", "linked": {"0": {"name": "model.weather_project.stg_weather", "type": "model", "succ": [1]}, "1": {"name": "model.weather_project.daily_temperature", "type": "model"}}}

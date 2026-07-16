@@ -15,11 +15,10 @@ def check_data():
 
     cursor = con.cursor()
     
-    print("--- [1/2] DERNIÈRES DONNÉES HORAIRES BRUTES (WEATHER) ---")
+    print("--- [1/2] DERNIÈRES DONNÉES HORAIRES BRUTES (STG_WEATHER) ---")
     cursor.execute("""
         SELECT *
-        FROM weather
-        ORDER BY time DESC
+        FROM stg_weather
         LIMIT 5
     """)
 
@@ -33,13 +32,12 @@ def check_data():
     cursor.execute("""SELECT COUNT(*) FROM weather
                    """)
     result = cursor.fetchone()
-    print(f"Nombre de lignes : {result[0]}")
+    print(f"Nombre d'heures recensées : {result[0]}")
 
     print("--- [2/2] DERNIÈRES MOYENNES JOURNALIÈRES (DBT MART) ---")
     cursor.execute("""
         SELECT *
         FROM daily_temperature
-        ORDER BY date DESC
         LIMIT 5
     """)
 
@@ -53,7 +51,7 @@ def check_data():
     cursor.execute("""SELECT COUNT(*) FROM daily_temperature
                    """)
     result = cursor.fetchone()
-    print(f"Nombre total de jours calculés : {result[0]}")
+    print(f"Nombre total de jours jusqu'à présent : {result[0]}")
 
     con.commit()
 
