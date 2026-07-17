@@ -13,13 +13,15 @@ L'architecture repose sur des technologies largement utilisées en entreprise :
 - Python
 - Pandas
 - API Open-Meteo
+- Metabase
 
 La pipeline automatise l'ensemble du traitement des données :
 
 - extraction incrémentale depuis l'API Open-Meteo ;
 - chargement dans PostgreSQL ;
 - transformations analytiques avec dbt ;
-- orchestration complète via Airflow.
+- orchestration complète via Airflow
+- visualisation avec Metabase.
 
 Le projet reproduit une architecture moderne de Data Engineering proche des environnements de production.
 
@@ -73,6 +75,7 @@ Le projet reproduit une architecture moderne de Data Engineering proche des envi
 | Pandas | Manipulation des données |
 | psycopg2 | Connexion PostgreSQL |
 | API Open-Meteo | Source des données météo |
+| Metabase | Visualisation des données |
 
 ---
 
@@ -103,6 +106,11 @@ weather-etl-project/
 │
 ├── data/
 │   └── raw_weather_data.csv
+│
+├── images/
+│   ├── metabase_temperature_journaliere.png
+│   ├── metabase_temperature_14_juillet.png
+│   └── metabase_min_max_30j.png
 │
 ├── Dockerfile
 ├── docker-compose.yml
@@ -254,6 +262,7 @@ Les principaux services sont :
 - airflow-init
 - airflow-webserver
 - airflow-scheduler
+- metabase
 
 Cette architecture garantit :
 
@@ -357,26 +366,14 @@ Vous pouvez adapter ces valeurs si vous souhaitez modifier les chemins ou la con
 Construisez l'image Docker :
 
 ```bash
-docker compose build
+docker-compose build
 ```
-
----
-
-## Initialiser Airflow
-
-Lors du premier lancement uniquement :
-
-```bash
-docker compose up airflow-init
-```
-
-Cette étape initialise la base de données Airflow et crée l'utilisateur administrateur.
 
 ---
 
 ## Lancer les services
 
-Démarrez ensuite tous les services :
+Démarrez tous les services :
 
 ```bash
 docker compose up
@@ -391,8 +388,10 @@ docker compose up -d
 Les services suivants seront lancés :
 
 - PostgreSQL
+- Airflow Init
 - Airflow Scheduler
 - Airflow Webserver
+- Metabase
 
 ---
 
@@ -458,7 +457,7 @@ SELECT * FROM daily_temperature LIMIT 10;
 ```
 # 📊 Visualisation des données avec Metabase
 
-Afin de compléter la pipeline ELT, une couche de visualisation a été intégrée grâce à **Metabase**, un outil open source de Business Intelligence.
+Afin de compléter la pipeline ELT, une couche de visualisation a été intégrée grâce à **Metabase**.
 
 Une fois les données extraites, transformées et chargées dans **PostgreSQL** via **Airflow** et **dbt**, Metabase permet d'explorer les données au travers de graphiques interactifs et de tableaux de bord.
 
@@ -567,6 +566,7 @@ Ce projet démontre des compétences en :
 - modélisation de données
 - gestion de pipelines de production
 - debugging et résolution d'erreurs
+- visualisation des données
 
 ---
 
@@ -591,7 +591,6 @@ Au cours du développement, plusieurs problématiques proches d'un contexte prof
 
 Plusieurs évolutions peuvent encore être apportées :
 
-- ajout d'un dashboard Metabase ;
 - tests de qualité des données avec dbt tests ;
 - documentation dbt (`dbt docs`);
 - CI/CD GitHub Actions ;
