@@ -262,6 +262,33 @@ Cette architecture garantit :
 - une séparation claire des services.
 
 ---
+# 💡 Intérêt de l'intégration de Metabase
+
+L'ajout de Metabase permet de compléter la chaîne de traitement des données en ajoutant une couche de restitution et d'analyse.
+
+Le projet couvre ainsi l'ensemble des principales étapes d'une pipeline de données moderne :
+
+```text
+                Open-Meteo API
+                      │
+                      ▼
+             Extraction (Python)
+                      │
+                      ▼
+         Chargement (PostgreSQL)
+                      │
+                      ▼
+          Modélisation (dbt)
+                      │
+                      ▼
+         Orchestration (Airflow)
+                      │
+                      ▼
+      Visualisation (Metabase)
+```
+
+Cette architecture est proche de celles utilisées dans de nombreux projets de Data Engineering en environnement professionnel.
+---
 
 # Chargement incrémental
 
@@ -429,9 +456,100 @@ SELECT * FROM stg_weather LIMIT 10;
 
 SELECT * FROM daily_temperature LIMIT 10;
 ```
+# 📊 Visualisation des données avec Metabase
+
+Afin de compléter la pipeline ELT, une couche de visualisation a été intégrée grâce à **Metabase**, un outil open source de Business Intelligence.
+
+Une fois les données extraites, transformées et chargées dans **PostgreSQL** via **Airflow** et **dbt**, Metabase permet d'explorer les données au travers de graphiques interactifs et de tableaux de bord.
+
+## Accéder à Metabase
+
+Après avoir démarré les services Docker :
+
+```bash
+docker-compose up
+```
+
+ouvrir :
+
+```text
+http://localhost:3000
+```
+
+Lors du premier lancement :
+
+1. Créer un compte administrateur.
+2. Ajouter une nouvelle base de données.
+3. Choisir **PostgreSQL**.
+4. Renseigner les informations suivantes :
+
+| Paramètre | Valeur |
+|-----------|--------|
+| Host | postgres |
+| Port | 5432 |
+| Database | weather_db |
+| Username | airflow |
+| Password | airflow |
+
+Une fois la connexion établie, les modèles créés avec **dbt** (`stg_weather` et `daily_temperature`) sont disponibles pour créer des visualisations.
+
+---
+# 📈 Exemples de visualisations
+
+## 1. Évolution de la température au cours de la journée du 14 juillet 2026
+
+![Évolution de la température du 14 juillet](images/metabase_temperature_14_juillet.png)
+
+### Étapes de création
+
+- Cliquer sur **Nouveau → Question**
+- Sélectionner le modèle **stg_weather**
+- Appliquer un filtre :
+  - **date = 14 juillet 2026**
+- Cliquer sur **Visualisation → Visualiser → Autres Graphiques → Courbe**
+- Choisir :
+  - Axe X : `date`
+  - Axe Y : `temperature_2m`
+- Donner un titre au graphique puis l'enregistrer.
+
+Ce graphique permet de suivre l'évolution de la température heure par heure au cours d'une journée.
 
 ---
 
+## 2. Évolution des températures minimales et maximales des 30 derniers jours
+
+![Températures minimales et maximales](images/metabase_min_max_30j.png)
+
+### Étapes de création
+
+- Cliquer sur **Nouveau → Question**
+- Sélectionner le modèle **stg_weather**
+- Filtrer les données sur les **30 derniers jours** 
+- Ajouter deux mesures :
+  - **Minimum de `temperature_2m`**
+  - **Maximum de `temperature_2m`**
+- Grouper les données par **Jour**
+- Cliquer sur **Visualisation → Visualiser → Autres Graphiques → Courbe**
+- Enregistrer le graphique.
+
+Cette visualisation met en évidence les variations quotidiennes des températures minimales et maximales.
+
+---
+
+## 3. Évolution de la température journalière depuis le 1er janvier 2024
+
+![Température journalière](images/metabase_temperature_journaliere.png)
+
+### Étapes de création
+
+- Cliquer sur **Nouveau → Question**
+- Sélectionner le modèle **daily_temperature**
+- Cliquer sur **Visualisation → Visualiser → Autres Graphiques → Courbe**
+- Enregistrer le graphique.
+
+Cette visualisation exploite le modèle d'agrégation créé avec **dbt** afin de représenter l'évolution de la température moyenne journalière sur une longue période.
+
+---
 # Compétences mises en œuvre
 
 Ce projet démontre des compétences en :
