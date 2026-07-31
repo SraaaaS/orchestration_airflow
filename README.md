@@ -520,9 +520,8 @@ Lors du premier lancement :
 | Username | airflow |
 | Password | airflow |
 
-```text
 Une fois la connexion établie, les modèles créés avec **dbt** (`stg_weather` et `daily_temperature`) sont disponibles pour créer des visualisations.
-```
+---
 ---
 # Résumé des commandes
 
