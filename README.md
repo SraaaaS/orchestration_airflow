@@ -86,7 +86,10 @@ weather-etl-project/
 
 ├── dags/
 │   └── etl_dag.py
-│
+│ 
+├── init-db/
+│   └── create_weather_db.sql    
+│ 
 ├── scripts/
 │   ├── extract.py
 │   ├── load.py
@@ -117,7 +120,36 @@ weather-etl-project/
 ├── requirements.txt
 └── README.md
 ```
+## Initialisation automatique de PostgreSQL
 
+Le projet initialise automatiquement PostgreSQL grâce au dossier :
+
+```
+
+init-db/
+└── create_weather_db.sql
+
+```
+
+Lors du premier démarrage :
+
+- la base Airflow (`airflow`) est créée ;
+- la base `weather_db` est créée automatiquement ;
+- aucune commande SQL manuelle supplémentaire n'est nécessaire.
+
+> **Important**
+>
+> Les scripts contenus dans `init-db/` sont exécutés **uniquement lors de la première création
+> du volume PostgreSQL**.
+>
+> Si le volume `postgres-db-volume` existe déjà, ils ne seront pas relancés.
+>
+> Pour réinitialiser complètement PostgreSQL :
+>
+> ```bash
+> docker-compose down -v
+> docker-compose up --build
+> ```
 ---
 
 # Fonctionnement de la pipeline
@@ -376,13 +408,13 @@ docker-compose build
 Démarrez tous les services :
 
 ```bash
-docker compose up
+docker-compose up
 ```
 
 ou en arrière-plan :
 
 ```bash
-docker compose up -d
+docker-compose up -d
 ```
 
 Les services suivants seront lancés :
@@ -491,7 +523,43 @@ Lors du premier lancement :
 | Password | airflow |
 
 Une fois la connexion établie, les modèles créés avec **dbt** (`stg_weather` et `daily_temperature`) sont disponibles pour créer des visualisations.
+---
+# Résumé des commandes
 
+## Premier démarrage
+
+Cloner le dépôt :
+
+```bash
+git clone https://github.com/SraaaaS/orchestration_airflow.git
+cd orchestration_airflow
+```
+
+Créer le fichier `.env` :
+
+```bash
+cp .env.example .env
+```
+
+Construire les images :
+
+```bash
+docker-compose build
+```
+
+Lancer le projet :
+
+```bash
+docker-compose up
+```
+
+Au premier lancement :
+
+- PostgreSQL est initialisé ;
+- la base `weather_db` est créée automatiquement ;
+- Airflow est configuré ;
+- Metabase est disponible sur http://localhost:3000.
+- 
 ---
 # 📈 Exemples de visualisations
 
