@@ -328,7 +328,7 @@ Le projet couvre ainsi l'ensemble des principales étapes d'une pipeline de donn
       Visualisation (Metabase)
 ```
 
-Cette architecture est proche de celles utilisées dans de nombreux projets de Data Engineering en environnement professionnel.
+#####Cette architecture est proche de celles utilisées dans de nombreux projets de Data Engineering en environnement professionnel.
 ---
 
 # Chargement incrémental
@@ -522,11 +522,9 @@ Lors du premier lancement :
 | Username | airflow |
 | Password | airflow |
 
-Une fois la connexion établie, les modèles créés avec **dbt** (`stg_weather` et `daily_temperature`) sont disponibles pour créer des visualisations.
+#####Une fois la connexion établie, les modèles créés avec **dbt** (`stg_weather` et `daily_temperature`) sont disponibles pour créer des visualisations.
 ---
 # Résumé des commandes
-
-## Premier démarrage
 
 Cloner le dépôt :
 
@@ -559,7 +557,7 @@ Au premier lancement :
 - la base `weather_db` est créée automatiquement ;
 - Airflow est configuré ;
 - Metabase est disponible sur http://localhost:3000.
-- 
+  
 ---
 # 📈 Exemples de visualisations
 
