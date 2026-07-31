@@ -318,3 +318,44 @@
 14:26:46.489685 [info ]: Loading profiles.yml
 14:32:20.302714 [info ]: Loading profiles.yml
 14:32:27.430901 [info ]: Loading profiles.yml
+==================== 2026-07-31T15:55:12.280060Z | 00000000-0000-0000-0000-000000000000 ====================
+==================== 2026-07-31T15:55:12.287736Z | 823c6155-d77a-4698-88e2-45e7a9dc630e ====================
+15:55:12.288435 [info ]: Starting dbt LSP server
+15:55:12.289550 [info ]: Connecting to LSP client on port 8000
+15:55:12.292778 [info ]: Successfully connected to LSP client
+15:55:12.293240 [info ]: Creating LSP service...
+15:55:12.404388 [info ]: Creating LSP server...
+15:55:12.404408 [info ]: Starting LSP server...
+15:55:12.489549 [info ]: Loading profiles.yml
+15:56:36.563833 [info ]: Loading profiles.yml
+15:56:36.590164 [info ]: Started loading project
+15:56:36.598473 [info ]: Loading profiles.yml
+15:56:36.602713 [info ]: Finished loading project [  0.01s]
+15:56:36.888962 [info ]: Loading profiles.yml
+15:56:37.465332 [info ]: Loading profiles.yml
+15:56:53.711344 [info ]: Loading profiles.yml
+15:57:01.213690 [info ]: Loading profiles.yml
+15:57:06.273720 [info ]: Loading profiles.yml
+15:58:50.060424 [info ]: Loading profiles.yml
+15:58:56.379377 [info ]: Loading profiles.yml
+16:00:01.934366 [info ]: Loading profiles.yml
+16:00:08.004363 [info ]: Loading profiles.yml
+16:02:06.362787 [info ]: Loading profiles.yml
+16:13:54.773586 [info ]: Loading profiles.yml
+16:14:09.225706 [info ]: Loading profiles.yml
+16:14:31.254130 [info ]: Loading profiles.yml
+16:14:31.285238 [info ]: Started loading project
+16:14:31.286353 [info ]: Loading profiles.yml
+16:14:31.286934 [info ]: Finished loading project [  0.00s]
+16:14:31.592108 [info ]: Loading profiles.yml
+16:14:32.152572 [info ]: Loading profiles.yml
+16:16:04.019436 [info ]: Loading profiles.yml
+16:19:54.866483 [info ]: Loading profiles.yml
+16:20:27.864973 [info ]: Loading profiles.yml
+16:20:48.322461 [info ]: Loading profiles.yml
+16:25:15.305643 [info ]: Loading profiles.yml
+16:25:15.773472 [info ]: Loading profiles.yml
+16:25:23.797903 [info ]: Loading profiles.yml
+16:26:56.174785 [info ]: Loading profiles.yml
+16:27:02.003181 [info ]: Loading profiles.yml
+16:30:22.304795 [info ]: Loading profiles.yml

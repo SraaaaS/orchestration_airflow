@@ -8,14 +8,19 @@ load_dotenv()
 #DB_PATH = os.getenv("WEATHER_DB_PATH")
 CSV_PATH = os.getenv("CSV_PATH")
 
+HOST=os.getenv("POSTGRES_HOST")
+USER = os.getenv("POSTGRES_USER")
+DATABASE = os.getenv("WEATHER_POSTGRES_DB")
+PASSWORD = os.getenv("POSTGRES_PASSWORD")
+
 def load():
 
     df = pd.read_csv(CSV_PATH)
     con = psycopg2.connect(
-        host="postgres",
-        database="weather_db",
-        user="airflow",
-        password="airflow"
+        host=HOST,
+        database=DATABASE,
+        user=USER,
+        password=PASSWORD
     )
 
     cursor = con.cursor()

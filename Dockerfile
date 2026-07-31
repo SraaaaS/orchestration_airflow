@@ -4,13 +4,16 @@ WORKDIR /opt/airflow
 
 COPY requirements.txt . 
 
-USER airflow
+USER root
+
 COPY dags/ /opt/airflow/dags
 COPY scripts/ /opt/airflow/scripts
 COPY dbt_weather /opt/airflow/dbt_weather
 COPY data/ /opt/airflow/data
 
-RUN pip install --upgrade pip
+USER airflow
+
+RUN pip install --no-cache-dir --upgrade pip
 RUN pip install -vvv --no-cache-dir -r requirements.txt
-RUN pip install  psycopg2-binary
-RUN pip install dbt-postgres==1.8.2
+RUN pip install --no-cache-dir psycopg2-binary
+RUN pip install --no-cache-dir dbt-postgres==1.8.2

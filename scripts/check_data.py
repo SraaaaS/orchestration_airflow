@@ -3,14 +3,18 @@ import os
 from dotenv import load_dotenv 
 load_dotenv()
 
+HOST=os.getenv("POSTGRES_HOST")
+USER = os.getenv("POSTGRES_USER")
+DATABASE = os.getenv("WEATHER_POSTGRES_DB")
+PASSWORD = os.getenv("POSTGRES_PASSWORD")
 
 def check_data():
     print("Connexion à la base de données")
     con = psycopg2.connect(
-        host="postgres",
-        database="weather_db",
-        user="airflow",
-        password="airflow"
+        host=HOST,
+        database=DATABASE,
+        user=USER,
+        password=PASSWORD
     )
 
     cursor = con.cursor()
